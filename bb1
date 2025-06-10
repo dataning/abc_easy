@@ -28,6 +28,112 @@ from news_analysis import (
 # Initialize proxy configuration first
 setup_corporate_proxy()
 
+# Typing animation functions
+def display_summary_with_typing_effect(summary_text: str, speed: int = 5):
+    """Display summary with word-by-word typing animation"""
+    # Split summary into sections
+    lines = summary_text.split('\n')
+    
+    # Calculate delay based on speed (1-10 scale, where 10 is fastest)
+    delay = 0.1 / speed  # Faster speed = smaller delay
+    
+    current_section = []
+    
+    for line in lines:
+        if line.startswith('📊') or line.startswith('🎯') or line.startswith('🔍') or \
+           line.startswith('📅') or line.startswith('📋') or line.startswith('📈'):
+            # Display accumulated section if any
+            if current_section:
+                display_section_animated(current_section, delay)
+            
+            # Start new section with header
+            current_section = []
+            if line.startswith('📊'):
+                st.markdown("### " + line)
+            elif any(line.startswith(emoji) for emoji in ['🎯', '🔍', '📅', '📋', '📈']):
+                st.markdown("#### " + line)
+        else:
+            current_section.append(line)
+    
+    # Display final section if any
+    if current_section:
+        display_section_animated(current_section, delay)
+
+def display_section_animated(lines: list, delay: float):
+    """Animate a section of text line by line with typing effect"""
+    # Create a placeholder for the entire section
+    section_placeholder = st.empty()
+    animated_text = []
+    
+    for line in lines:
+        if not line.strip():  # Empty line
+            animated_text.append("")
+            continue
+        
+        # For bullet points or special formatting, show the marker immediately
+        if line.strip().startswith(('•', '-', '*', '1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.')):
+            # Find where the actual content starts
+            marker_end = line.find(' ', line.find('.') + 1 if '.' in line[:3] else 0)
+            if marker_end == -1:
+                marker_end = len(line)
+            
+            marker = line[:marker_end+1]
+            content = line[marker_end+1:]
+            
+            # Animate the content word by word
+            words = content.split()
+            animated_line = marker
+            
+            for i, word in enumerate(words):
+                animated_line += word + " "
+                animated_text_copy = animated_text.copy()
+                animated_text_copy.append(animated_line.rstrip())
+                
+                # Update the display
+                section_placeholder.markdown('\n'.join(animated_text_copy))
+                time.sleep(delay)
+            
+            animated_text.append(line)
+        else:
+            # Regular line - animate word by word
+            words = line.split()
+            animated_line = ""
+            
+            for i, word in enumerate(words):
+                animated_line += word + " "
+                animated_text_copy = animated_text.copy()
+                animated_text_copy.append(animated_line.rstrip())
+                
+                # Update the display
+                section_placeholder.markdown('\n'.join(animated_text_copy))
+                time.sleep(delay)
+            
+            animated_text.append(line)
+    
+    # Final update with complete text
+    section_placeholder.markdown('\n'.join(animated_text))
+
+def display_summary_instant(summary_text: str):
+    """Display summary instantly without animation"""
+    lines = summary_text.split('\n')
+    current_section = []
+    
+    for line in lines:
+        if line.startswith('📊') or line.startswith('🎯') or line.startswith('🔍') or \
+           line.startswith('📅') or line.startswith('📋') or line.startswith('📈'):
+            if current_section:
+                st.markdown('\n'.join(current_section))
+            current_section = [line]
+            if line.startswith('📊'):
+                st.markdown("### " + line)
+            elif any(line.startswith(emoji) for emoji in ['🎯', '🔍', '📅', '📋', '📈']):
+                st.markdown("#### " + line)
+        else:
+            current_section.append(line)
+    
+    if current_section:
+        st.markdown('\n'.join(current_section))
+
 # Page configuration
 st.set_page_config(
     page_title="News Analysis Dashboard",
@@ -349,33 +455,36 @@ if st.session_state.analysis_complete and not st.session_state.df_results.empty:
         date_range = f"{st.session_state.df_results['Date'].min()} to {st.session_state.df_results['Date'].max()}"
         st.metric("Date Range", date_range)
     
-    # Display summary
+    # Display summary with typing animation
     if st.session_state.summary:
         st.markdown("---")
         st.header("📝 AI-Generated Summary")
         
-        # Format and display summary in a nice box
+        # Add a control for typing speed
+        col1, col2, col3 = st.columns([1, 1, 2])
+        with col1:
+            typing_speed = st.slider("Typing Speed", min_value=1, max_value=10, value=5, help="Higher = Faster")
+        with col2:
+            skip_animation = st.button("⏭️ Skip Animation")
+        
+        # Format and display summary with typing effect
         summary_container = st.container()
+        
+        # Check if we should animate or not
+        should_animate = 'summary_animated' not in st.session_state or not st.session_state.summary_animated
+        
+        if skip_animation:
+            should_animate = False
+            st.session_state.summary_animated = True
+        
         with summary_container:
-            # Split summary into sections for better display
-            summary_lines = st.session_state.summary.split('\n')
-            
-            current_section = []
-            for line in summary_lines:
-                if line.startswith('📊') or line.startswith('🎯') or line.startswith('🔍') or \
-                   line.startswith('📅') or line.startswith('📋') or line.startswith('📈'):
-                    if current_section:
-                        st.markdown('\n'.join(current_section))
-                    current_section = [line]
-                    if line.startswith('📊'):
-                        st.markdown("### " + line)
-                    elif any(line.startswith(emoji) for emoji in ['🎯', '🔍', '📅', '📋', '📈']):
-                        st.markdown("#### " + line)
-                else:
-                    current_section.append(line)
-            
-            if current_section:
-                st.markdown('\n'.join(current_section))
+            if should_animate and not skip_animation:
+                # Animate the summary
+                display_summary_with_typing_effect(st.session_state.summary, typing_speed)
+                st.session_state.summary_animated = True
+            else:
+                # Display without animation (instant)
+                display_summary_instant(st.session_state.summary)
     
     # Articles table
     st.markdown("---")
