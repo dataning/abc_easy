@@ -1,37 +1,9 @@
 import os
-import ssl
-import urllib3
 import uuid
 import requests
 import time
 import datetime
 from requests.auth import HTTPBasicAuth
-
-# ========================= CORPORATE PROXY CONFIGURATION =========================
-def setup_corporate_proxy():
-    """Complete setup for corporate proxy with SSL bypass"""
-    
-    # 1. Set proxy environment variables
-    proxy_url = 'http://webproxy.bfm.com:8080'
-    os.environ['HTTP_PROXY'] = proxy_url
-    os.environ['HTTPS_PROXY'] = proxy_url
-    os.environ['http_proxy'] = proxy_url
-    os.environ['https_proxy'] = proxy_url
-    
-    # 2. Disable SSL verification globally
-    ssl._create_default_https_context = ssl._create_unverified_context
-    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-    
-    # 3. Clear certificate bundles
-    os.environ['CURL_CA_BUNDLE'] = ''
-    os.environ['REQUESTS_CA_BUNDLE'] = ''
-    os.environ['SSL_VERIFY'] = 'false'
-    os.environ['PYTHONHTTPSVERIFY'] = '0'
-    
-    print(f"✅ Corporate proxy configured: {proxy_url}")
-
-# Apply configuration before any imports
-setup_corporate_proxy()
 
 # ========================= IMPORTS =========================
 from skywalker import get_and_save_gdelt_articles
@@ -51,7 +23,6 @@ import time
 # Configure logging to reduce verbosity
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
-logging.getLogger("httpx").setLevel(logging.WARNING)
 
 # ========================= BLACKROCK API CONFIGURATION =========================
 # Authentication credentials
@@ -109,8 +80,7 @@ class BlackRockLLMClient:
                 self.compute_url,
                 auth=HTTPBasicAuth(self.username, self.password),
                 headers=self._generate_headers(),
-                json=request_payload,
-                verify=False  # For corporate proxy
+                json=request_payload
             )
             
             if response_post.status_code != 200:
@@ -132,8 +102,7 @@ class BlackRockLLMClient:
                 result_response = requests.get(
                     operation_url,
                     auth=HTTPBasicAuth(self.username, self.password),
-                    headers=self._generate_headers(),
-                    verify=False  # For corporate proxy
+                    headers=self._generate_headers()
                 )
                 
                 if result_response.status_code != 200:
@@ -218,16 +187,16 @@ class BlackRockLLMClient:
 # Create a GenericLLMClient alias for backward compatibility
 GenericLLMClient = BlackRockLLMClient
 
-def test_api_with_proxy(llm_client: BlackRockLLMClient):
-    """Test API calls through proxy"""
-    print(f"🧪 Testing BlackRock API through corporate proxy...")
+def test_api(llm_client: BlackRockLLMClient):
+    """Test API calls"""
+    print(f"🧪 Testing BlackRock API...")
     
     try:
         test_prompt = "Hello, this is a test message. Please respond briefly."
         response = llm_client.generate(test_prompt, max_tokens=50)
         
         if "Error" not in response:
-            print(f"✅ BlackRock API working through corporate proxy!")
+            print(f"✅ BlackRock API working!")
             print(f"   Response preview: {response[:50]}...")
             return True
         else:
@@ -238,58 +207,24 @@ def test_api_with_proxy(llm_client: BlackRockLLMClient):
         return False
 
 # Initialize the LLM client with BlackRock API
-print("\n🚀 Initializing BlackRock LLM client with corporate proxy support...")
+print("\n🚀 Initializing BlackRock LLM client...")
 llm_client = BlackRockLLMClient("gpt-4o")  # Using GPT-4o model
 
-# Test proxy and API connectivity
+# Test API connectivity
 print("\n📡 Testing connectivity...")
-proxy_ok = test_proxy_connection()
-api_ok = test_api_with_proxy(llm_client)
+api_ok = test_api(llm_client)
 
-if proxy_ok and api_ok:
-    print("\n🎉 All systems ready with BlackRock API and corporate proxy support!")
+if api_ok:
+    print("\n🎉 All systems ready with BlackRock API!")
 else:
     print("\n⚠️ Some connectivity issues detected but continuing...")
 
 # ========================= REST OF YOUR ORIGINAL CODE CONTINUES BELOW =========================
 
-def test_proxy_connection():
-    """Test if proxy connection is working"""
-    proxy_url = os.environ.get('HTTPS_PROXY', os.environ.get('HTTP_PROXY'))
-    
-    if not proxy_url:
-        print("❌ No proxy configured")
-        return False
-    
-    try:
-        import requests
-        
-        print(f"🔍 Testing proxy connection: {proxy_url}")
-        
-        response = requests.get(
-            'https://httpbin.org/ip', 
-            timeout=10,
-            verify=False  # Corporate proxy SSL bypass
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            print(f"✅ Proxy working! External IP: {result.get('origin', 'Unknown')}")
-            return True
-        else:
-            print(f"❌ Proxy test failed with status: {response.status_code}")
-            return False
-            
-    except Exception as e:
-        print(f"❌ Proxy test failed: {e}")
-        return False
-
 def get_sentence_model():
     """Get or initialize the sentence transformer model"""
     global sentence_model
     if 'sentence_model' not in globals():
-        # Configure for proxy environment if needed
-        os.environ['HF_HUB_OFFLINE'] = '0'  # Allow online downloads through proxy
         sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
     return sentence_model
 
@@ -441,10 +376,6 @@ def fetch_articles_for_terms_parallel(search_terms: List[str], max_records: int 
                 return df
         except Exception as e:
             print(f"Error fetching '{kw}': {e}")
-            # Check for proxy-related errors
-            if "proxy" in str(e).lower() or "connection" in str(e).lower():
-                print(f"  This might be a proxy issue - testing connection...")
-                test_proxy_connection()
         return pd.DataFrame()
     
     print(f"Fetching articles for {len(search_terms)} terms in parallel...")
@@ -1003,7 +934,6 @@ def generate_summary_with_llm(df: pd.DataFrame, query: str) -> str:
 • Average Relevance Score: {df_top['score_geo'].mean():.3f}
 • Sources Actually Cited: {len(set(cited_ids))} unique citations
 • LLM Provider: {llm_client.provider} ({llm_client.model})
-• Proxy Status: {'Active' if os.environ.get('HTTPS_PROXY') else 'Not configured'}
 """
         
         print("✅ Summary generation completed successfully")
@@ -1013,11 +943,6 @@ def generate_summary_with_llm(df: pd.DataFrame, query: str) -> str:
         print(f"❌ Error during API call or processing: {e}")
         print(f"🔍 Error type: {type(e).__name__}")
         print(f"🔍 Error details: {str(e)}")
-        
-        # Check for proxy errors
-        if "proxy" in str(e).lower() or "connection" in str(e).lower():
-            print("🔍 This appears to be a proxy-related error")
-            test_proxy_connection()
         
         print("🔄 Falling back to conservative summary...")
         return create_conservative_fallback_summary(df, query, news_id_mapping, df_top)
@@ -1165,7 +1090,6 @@ Most available coverage focuses on general news rather than specific details abo
 • Main Entity: {main_entity}
 • Search Terms Used: {len(query_terms)} terms derived from query
 • Recommendation: {'Expand search terms' if specific_matches == 0 else 'Search specialized publications'} for {focus_area.replace(' activities and developments', '')} information
-• Proxy Status: {'Active' if os.environ.get('HTTPS_PROXY') else 'Not configured'}
 • LLM Provider: BlackRock API (gpt-4o)
 """
     
