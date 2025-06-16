@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
+
+  <meta name="author" content="Ning Lu">
+  <meta name="dcterms.date" content="2025-06-16">
+  <title>agent_blk – Introduction to Agentic AI</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-00033b64c7f4405b1251d0bf85080562.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Introduction to Agentic AI</h1>
+  <p class="subtitle">GenAI Dojo 1</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+<a href="https://linkedin.com/in/ninglu">Ning Lu</a> 
+</div>
+</div>
+</div>
+
+  <p class="date">2025-06-16</p>
+</section>
+<section id="session-content" class="slide level2 small-font underline">
+<h2>Session Content</h2>
+<p>This presentation will cover some of the new thinking in agentic AI:</p>
+<ol type="1">
+<li>Hello, Agent</li>
+<li>Mechanics</li>
+<li>Agency vs.&nbsp;Control</li>
+<li>Memory</li>
+<li>Evals</li>
+</ol>
+</section>
+<section id="hello-agent" class="slide level2 smaller center" data-background-color="#00ff88">
+<h2>Hello, Agent</h2>
+</section>
+<section id="what-is-agentic-ai" class="slide level2 small-font underline">
+<h2>What is Agentic AI?</h2>
+<p>Agentic AI describes systems that can <span style="background-color: #ff6b9d; color: black;">act autonomously</span>, make decisions in a multi-step process, and take actions based on their own understanding of the world. This contrasts with traditional AI systems, which are typically designed to perform specific tasks or follow predefined rules as single-shot generators.</p>
+<p>Instead, agentic AI systems <span style="background-color: #ff6b9d; color: black;">break down tasks</span> into manageable subtasks, <span style="background-color: #4ecdc4; color: black;">propose and refine intermediate solutions</span>, and <span style="background-color: #ffe66d; color: black;">solicit or incorporate feedback</span> at each stage<strong>—creating an iterative, collaborative workflow</strong>.</p>
+<p>Being agentic means thinking both at the individual level — focusing on <span style="background-color: #a8e6cf; color: black;">autonomy</span> and decision-making—and at the systemic level — understanding and engaging with broader <span style="background-color: #c7ceea; color: black;">systems</span>.</p>
+<div style="text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXQ4OW50YWJyb3hjZ3JnYThjcjhhZTd3MHZ1a2ZscWJ4bHB6dDhzNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/d9QiBcfzg64Io/giphy.gif" width="200"></p>
+<figcaption>Pac-Man</figcaption>
+</figure>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Consider how PAG teams collaborates with PMG and other stakeholders throughout each phase — receiving requests, scoping requirements, planning and development, testing and validation, and finally showcasing outcomes — maintaining open communication and feedback every step of the way, much like team leads, project managers, and executives collaborating from initial brief to final delivery.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="why-should-we-bother" class="slide level2 small-font underline">
+<h2>Why should we bother?</h2>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(0, 255, 136, 0.1); border-left: 4px solid #00ff88;">
+<p><strong>Higher-Quality Outputs</strong></p>
+<p><em>Avoid dumping an unvetted 1,000-word report. Instead, each chunk gets checked, so the output is more accurate</em></p>
+</div>
+</div>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(135, 206, 235, 0.1); border-left: 4px solid #87ceeb;">
+<p><strong>Faster Turnaround</strong></p>
+<p><em>Think of it like a relay race: while the AI polishes the executive summary, you can research supporting data</em></p>
+</div>
+</div>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(255, 107, 157, 0.1); border-left: 4px solid #ff6b9d;">
+<p><strong>Transparent Reasoning</strong></p>
+<p><em>You see the chain of reasoning — no more black-box outputs. It’s easier to audit, trust, and debug</em></p>
+</div>
+</div>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(221, 160, 221, 0.1); border-left: 4px solid #dda0dd;">
+<p><strong>Improved Collaboration Dynamics</strong></p>
+<p><em>Instead of treating the AI as a magic text-generator, we engage it as a partner or a teammate</em></p>
+</div>
+</div>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid #ffa500;">
+<p><strong>Scalable Expertise</strong></p>
+<p><em>You can plug in specialist routines — legal review, style enforcement</em></p>
+</div>
+</div>
+</section>
+<section id="case-ocio-endowment-research" class="slide level2 small-font underline">
+<h2>Case: OCIO Endowment Research</h2>
+<p><br></p>
+<h3 id="traditional-genai">Traditional GenAI</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[News Search] --&gt; B[Keywords]
+    B --&gt; C[Batch Process]
+    C --&gt; D[LLM - Sentiment Score]
+    D --&gt; E[Email Alert]
+    
+    style A fill:#87ceeb,stroke:#000,color:#000
+    style B fill:#98fb98,stroke:#000,color:#000
+    style C fill:#dda0dd,stroke:#000,color:#000
+    style D fill:#ffa500,stroke:#000,color:#000
+    style E fill:#ff4444,stroke:#000,color:#fff
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid #ffa500;">
+<p><strong>“Harvard endowment sentiment: -1”</strong> <strong>“Yale endowment sentiment: -1”</strong></p>
+</div>
+</div>
+<p><br></p>
+<h3 id="agentic-research">Agentic Research</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Research Query] --&gt; B[Agent Planning]
+    B --&gt; C[Multi-Source Intel]
+    C --&gt; D[Contextual Analysis]
+    D --&gt; E[Memory Integration]
+    E --&gt; F[Self-Reflection]
+    E --&gt; G[Summarization]
+    F --&gt; H[Insight Generation]
+    G --&gt; H
+    H --&gt; I[Action Planning]
+    I --&gt; J[Continuous Learning]
+    J --&gt; E
+    
+    style A fill:#87ceeb,stroke:#000,color:#000
+    style B fill:#00ff88,stroke:#000,color:#000
+    style C fill:#98fb98,stroke:#000,color:#000
+    style D fill:#ffa500,stroke:#000,color:#000
+    style E fill:#dda0dd,stroke:#000,color:#000
+    style F fill:#ff6b9d,stroke:#000,color:#000
+    style G fill:#ffb347,stroke:#000,color:#000
+    style H fill:#ff4444,stroke:#000,color:#fff
+    style I fill:#87ceeb,stroke:#000,color:#000
+    style J fill:#90ee90,stroke:#000,color:#000
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(0, 255, 136, 0.1); border-left: 4px solid #00ff88;">
+<p><strong>Harvard faces $43M annual excise tax burden = 860 full scholarships cut.</strong></p>
+<p><strong>Context:</strong> Spend rate reduced 4.7% → 4.1% since 2019. Yale adopting similar defensive strategies.</p>
+<p><strong>Prediction:</strong> Tuition dependency +12% above peers. Q3 lobbying spend likely +40%.</p>
+<p><strong>Action:</strong> Monitor asset reallocation as well as bond issuance. Emergency spend rate cut probable if grant cuts exceed 15%.</p>
+</div>
+</div>
+</section>
+<section id="mechanics" class="slide level2 smaller center" data-background-color="#dda0dd">
+<h2>Mechanics</h2>
+</section>
+<section id="mechanics-of-agentic-ai" class="slide level2 small-font">
+<h2>Mechanics of Agentic AI</h2>
+<p><br></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 35%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>What It Does</th>
+<th>Why It Matters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Goal Decomposition</strong></td>
+<td>Breaks tasks into manageable subtasks</td>
+<td>Handles problems too big for single AI calls</td>
+</tr>
+<tr class="even">
+<td><strong>Orchestration</strong></td>
+<td>Coordinates multiple agents</td>
+<td>Ensures agents collaborate instead of conflict</td>
+</tr>
+<tr class="odd">
+<td><strong>Memory Systems</strong></td>
+<td>Persistent context across conversations</td>
+<td>Learns from past, builds knowledge</td>
+</tr>
+<tr class="even">
+<td><strong>Dynamic Adaptation</strong></td>
+<td>Adjusts strategy based on results</td>
+<td>Self-corrects when approaches aren’t working</td>
+</tr>
+<tr class="odd">
+<td><strong>Evaluation Systems</strong></td>
+<td>Continuous assessment and feedback</td>
+<td>Ensures outputs meet standards and improve</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 class="underline" id="goal-decomposition">🧩 Goal Decomposition</h4>
+<h5 id="break-write-market-analysis-into">Break “Write market analysis” into:</h5>
+<ul>
+<li>Trend analysis<br>
+</li>
+<li>Risk assessment</li>
+<li>Executive summary</li>
+</ul>
+<h4 class="underline" id="orchestration">🔗 Orchestration</h4>
+<h5 id="coordinate-multiple-specialists">Coordinate multiple specialists:</h5>
+<ul>
+<li>Research agent finds data</li>
+<li>Analysis agent interprets trends</li>
+<li>Writing agent creates narrative</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 class="underline" id="memory-systems">🧠 Memory Systems</h4>
+<h5 id="remember-across-sessions">Remember across sessions:</h5>
+<ul>
+<li>Your preferences and style</li>
+<li>Past analysis methods</li>
+<li>Client-specific requirements</li>
+</ul>
+<h4 class="underline" id="dynamic-adaptation">⚡ Dynamic Adaptation</h4>
+<h5 id="self-correct-in-real-time">Self-correct in real-time:</h5>
+<ul>
+<li>“This data source is outdated”</li>
+<li>“Client prefers conservative estimates”</li>
+<li>“Need more technical detail”</li>
+</ul>
+</div></div>
+</section>
+<section id="from-single-to-multi-agent-systems" class="slide level2 small-font underline">
+<h2>From Single to Multi-Agent Systems</h2>
+<h3 id="single-agent-task-decomposition">Single Agent → Task Decomposition</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Task] --&gt; B[Decomposer]
+    
+    B --&gt; C[Subtask 1]
+    B --&gt; D[Subtask 2]
+    
+    C --&gt; E[Agent A]
+    D --&gt; F[Agent B]
+    
+    E --&gt; G[Result A]
+    F --&gt; H[Result B]
+    
+    G --&gt; I[Combiner]
+    H --&gt; I
+    
+    I --&gt; J[Final Output]
+    
+    style B fill:#00ff88,stroke:#000,color:#000
+    style E fill:#87ceeb,stroke:#000,color:#000
+    style F fill:#87ceeb,stroke:#000,color:#000
+    style I fill:#dda0dd,stroke:#000,color:#000
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<h3 id="multi-agent-memory-orchestration">Multi-Agent → Memory &amp; Orchestration</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Complex Task] --&gt; B[Orchestrator]
+    
+    B --&gt; C[Decomposer]
+    C --&gt; D[Agent 1]
+    C --&gt; E[Agent 2]
+    
+    D --&gt; F[Context 1]
+    E --&gt; G[Context 2]
+    
+    F --&gt; H[Memory Store]
+    G --&gt; H
+    
+    H --&gt; I[State Manager]
+    I --&gt; J[Reflection Engine]
+    
+    J --&gt; K[Quality Review]
+    K --&gt;|Pass| L[Results Integrator]
+    K --&gt;|Iterate| B
+    
+    L --&gt; M[Final Deliverable]
+    
+    %% Memory and state connections
+    H -.-&gt; F
+    H -.-&gt; G
+    I -.-&gt; D
+    I -.-&gt; E
+    J -.-&gt; B
+    
+    style B fill:#00ff88,stroke:#000,color:#000
+    style C fill:#4ecdc4,stroke:#000,color:#000
+    style D fill:#87ceeb,stroke:#000,color:#000
+    style E fill:#87ceeb,stroke:#000,color:#000
+    style H fill:#ffa500,stroke:#000,color:#000
+    style I fill:#ff6b9d,stroke:#000,color:#000
+    style J fill:#dda0dd,stroke:#000,color:#000
+    style K fill:#ffb347,stroke:#000,color:#000
+    style L fill:#98fb98,stroke:#000,color:#000
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<h3 id="advanced-multi-agent-specialized-workflows">Advanced Multi-Agent → Specialized Workflows</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["What's today's top AI news?"] --&gt; B[Orchestrator]
+
+    B --&gt; C[Decomposer]
+    C --&gt; D1[Topic Discovery&lt;br/&gt;Agent]
+    C --&gt; D2[Source Selector&lt;br/&gt;Agent]
+
+    D1 --&gt; E1[Context: Trends]
+    D2 --&gt; E2[Context: RSS &amp; APIs]
+
+    E1 --&gt; F[Context Store]
+    E2 --&gt; F
+
+    F --&gt; G[State Manager]
+    G --&gt; H1[Fetch &amp; Normalize&lt;br/&gt;Agent]
+    G --&gt; H2[Dedup &amp; Cluster&lt;br/&gt;Agent]
+
+    H1 --&gt; I1[Raw Articles]
+    H2 --&gt; I2[Article Clusters]
+
+    I1 --&gt; J1[Semantic Rank&lt;br/&gt;Agent]
+    I2 --&gt; J2[Summary&lt;br/&gt;Agent]
+
+    J1 --&gt; K[Memory Store]
+    J2 --&gt; K
+
+    K --&gt; L[Reflection Engine]
+    L --&gt; M{Quality Check}
+    M --&gt;|OK| N[Results Integrator]
+    M --&gt;|Bad| O[Feedback&lt;br/&gt;to Orchestrator]
+    O --&gt; B
+
+    N --&gt; P[Personalized Digest]
+
+    %% Styling
+    style B fill:#00ff88,stroke:#000,color:#000
+    style C fill:#4ecdc4,stroke:#000,color:#000
+    style D1 fill:#87ceeb,stroke:#000,color:#000
+    style D2 fill:#87ceeb,stroke:#000,color:#000
+    style H1 fill:#87ceeb,stroke:#000,color:#000
+    style H2 fill:#87ceeb,stroke:#000,color:#000
+    style J1 fill:#87ceeb,stroke:#000,color:#000
+    style J2 fill:#87ceeb,stroke:#000,color:#000
+    style F fill:#fff2e6,stroke:#ffa500
+    style K fill:#ffa500,stroke:#000,color:#000
+    style G fill:#ff6b9d,stroke:#000,color:#000
+    style L fill:#dda0dd,stroke:#000,color:#000
+    style M fill:#ffb347,stroke:#000,color:#000
+    style N fill:#98fb98,stroke:#000,color:#000
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Evolution:</strong> Simple task splitting → Memory-driven coordination → Specialized agent ecosystems with feedback loops</p>
+</div>
+</div>
+</div>
+</section>
+<section id="agency-vs.-control" class="slide level2 smaller center" data-background-color="#ff4444">
+<h2>Agency vs.&nbsp;Control</h2>
+</section>
+<section id="control-flow-vs-agentic" class="slide level2 small-font">
+<h2>Control Flow vs Agentic</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 44%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Control-flow solution</th>
+<th>Agentic solution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Who decides what happens next?</strong></td>
+<td>You, at design time. The order of operations is hard-coded.</td>
+<td>The agent decides at run-time, typically after reasoning with an LLM or other planner.</td>
+</tr>
+<tr class="even">
+<td><strong>Source of goals</strong></td>
+<td>External: the caller supplies every input and every branch point.</td>
+<td>Internal: the agent interprets a high-level goal, sets sub-goals, and may even rewrite its own plan.</td>
+</tr>
+<tr class="odd">
+<td><strong>Granularity of components</strong></td>
+<td>Functions or tasks wired together by explicit calls (<code>foo(); bar();</code>).</td>
+<td>Autonomous agents that expose a “toolbox” and negotiate with each other.</td>
+</tr>
+<tr class="even">
+<td><strong>Primary abstractions</strong></td>
+<td>Loops, if/else, explicit orchestration, workflow DAGs.</td>
+<td>plan-act-observe loop, reflection chains, dynamic tool selection.</td>
+</tr>
+<tr class="odd">
+<td><strong>Predictability</strong></td>
+<td>Highly deterministic. Same inputs ⇒ same path.</td>
+<td>Stochastic. Tempered by guard-rails, but the path can vary between runs.</td>
+</tr>
+<tr class="even">
+<td><strong>Testing style</strong></td>
+<td>Unit &amp; integration tests over fixed call graphs.</td>
+<td>Simulation, sandbox runs, and behavioral assertions (e.g.&nbsp;“never call the payment API unless estimate ≥ $100”).</td>
+</tr>
+<tr class="odd">
+<td><strong>When to use</strong></td>
+<td>ETL pipelines, billing, compliance tasks, anything with regulatory requirements</td>
+<td>Research assistants, dynamic data aggregation, automated ops runbooks, user-facing chatbots that need to improvise</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>This table highlights the fundamental differences between traditional control-flow programming and agentic AI systems.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="control-flow-vs-agentic---code-difference" class="slide level2 small-font">
+<h2>Control Flow vs Agentic - Code Difference</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Control Flow Approach</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="kw">def</span> run_pipeline(data):</span>
+<span id="cb1-2"><a></a>    cleaned <span class="op">=</span> clean(data)</span>
+<span id="cb1-3"><a></a>    features <span class="op">=</span> featurize(cleaned)</span>
+<span id="cb1-4"><a></a>    model <span class="op">=</span> load_model()</span>
+<span id="cb1-5"><a></a>    predictions <span class="op">=</span> model.predict(features)</span>
+<span id="cb1-6"><a></a>    <span class="cf">return</span> postprocess(predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Agentic Approach</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> autogen <span class="im">import</span> AssistantAgent, Tool</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a><span class="co"># Each tool is an explicit skill you let the agent call</span></span>
+<span id="cb2-4"><a></a>tools <span class="op">=</span> [</span>
+<span id="cb2-5"><a></a>    Tool(name<span class="op">=</span><span class="st">"search_web"</span>, fn<span class="op">=</span>search_web),</span>
+<span id="cb2-6"><a></a>    Tool(name<span class="op">=</span><span class="st">"summarize"</span>, fn<span class="op">=</span>summarize),</span>
+<span id="cb2-7"><a></a>]</span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a>agent <span class="op">=</span> AssistantAgent(</span>
+<span id="cb2-10"><a></a>    name<span class="op">=</span><span class="st">"Researcher"</span>,</span>
+<span id="cb2-11"><a></a>    objective<span class="op">=</span><span class="st">"Write a one-page market brief on solar-powered IoT devices"</span>,</span>
+<span id="cb2-12"><a></a>    tools<span class="op">=</span>tools,</span>
+<span id="cb2-13"><a></a>    reflexion<span class="op">=</span><span class="va">True</span>,      </span>
+<span id="cb2-14"><a></a>    max_steps<span class="op">=</span><span class="dv">15</span></span>
+<span id="cb2-15"><a></a>)</span>
+<span id="cb2-16"><a></a></span>
+<span id="cb2-17"><a></a>agent.run()               </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div>
+<aside class="notes">
+<p>Left side shows deterministic, hard-coded flow. Right side shows goal-oriented, self-directing agent.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="quick-check-control-flow-or-agentic" class="slide level2 small-font">
+<h2>Quick Check: Control Flow or Agentic?</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 61%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>If you answer YES you’re probably…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“Do I know exactly which function will be called second?”</td>
+<td><strong>Control flow</strong></td>
+</tr>
+<tr class="even">
+<td>“Could an LLM decide whether to call the database or the vector store?”</td>
+<td><strong>Agentic</strong></td>
+</tr>
+<tr class="odd">
+<td>“Can the system set a brand-new sub-goal I didn’t anticipate?”</td>
+<td><strong>Agentic</strong></td>
+</tr>
+<tr class="even">
+<td>“Can I write a unit test that walks every path?”</td>
+<td><strong>Control flow</strong></td>
+</tr>
+<tr class="odd">
+<td>“Is reproducibility more important than creativity?”</td>
+<td><strong>Control flow</strong></td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://miro.medium.com/v2/resize:fit:960/1*jrwWTfkHEVRBwTVZ5amkBQ.gif" width="600"></p>
+<figcaption>Agentic AI Workflow</figcaption>
+</figure>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Key Takeaway 1</strong>: Control flow = predictable paths, Agentic = adaptive decisions</p>
+</div>
+<div class="fragment">
+<p><strong>Key Takeaway 2</strong>: The fundamental trade-off between control and freedom shapes your architecture choice</p>
+</div>
+<aside class="notes">
+<p>This checklist helps determine whether your system design leans toward traditional control flow or agentic AI patterns.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="memory" class="slide level2 smaller center" data-background-color="#ff6b9d">
+<h2>Memory</h2>
+</section>
+<section class="slide level2">
+
+<h3 class="small-font underline" id="memory-from-scratch-to-strategy">Memory: From Scratch to Strategy</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    A[🧠 Brain Only] --&gt; B[GenAI]
+    C[📓 Notepad + Brain] --&gt; D[Agentic AI - 1]
+    E[💻 Laptop + Brain] --&gt; F[Agentic AI - 2]
+    
+    style A fill:#87ceeb,stroke:#000,color:#000
+    style B fill:#ff6b9d,stroke:#000,color:#000
+    style C fill:#00ff88,stroke:#000,color:#000
+    style D fill:#ffa500,stroke:#000,color:#000
+    style E fill:#dda0dd,stroke:#000,color:#000
+    style F fill:#ff4444,stroke:#000,color:#fff
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:35%;">
+<p><em>Forgettable</em></p>
+<ul>
+<li>🛑 Restart every time</li>
+<li>🔍 Lose context</li>
+</ul>
+</div><div class="column" style="width:35%;">
+<p><em>Continuous</em></p>
+<ul>
+<li>📖 Recall past notes</li>
+<li>⚙️ Build on history</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><em>Insightful</em></p>
+<ul>
+<li>🔎 Search archives</li>
+<li>🔗 Cross-ref data</li>
+</ul>
+</div></div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Notebook wins meetings. AI memory wins workflows.</strong></p>
+</div>
+</div>
+</div>
+</section>
+<section id="memory-evolution" class="slide level2 small-font">
+<h2>Memory Evolution</h2>
+<h4 class="small-font underline" id="langchain-memory-types">Langchain Memory Types</h4>
+<div class="r-frame" style="padding: 0.1rem; background-color: rgba(135, 206, 235, 0.1); border-left: 3px solid #87ceeb;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 32%">
+<col style="width: 28%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Memory Type</th>
+<th style="text-align: left;">What is stored</th>
+<th style="text-align: left;">Examples</th>
+<th style="text-align: left;">Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>🧠 Semantic</strong></td>
+<td style="text-align: left;">Facts &amp; knowledge baked into prompt</td>
+<td style="text-align: left;">“Capital of France = Paris”<br>“User prefers metric units”</td>
+<td style="text-align: left;">Fixed; no self-editing once deployed</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>📚 Episodic</strong></td>
+<td style="text-align: left;">Time-stamped experiences &amp; events</td>
+<td style="text-align: left;">“2025-06-10: user booked flight”</td>
+<td style="text-align: left;">Lives only until context window overflows</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>⚙️ Procedural</strong></td>
+<td style="text-align: left;">Rules, skills, system instructions</td>
+<td style="text-align: left;">“Always answer in JSON”<br>“Obey brand style-guide”</td>
+<td style="text-align: left;">Hard-coded behaviour; edits require redeploy</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h4 class="small-font underline" id="memgpt-memory-architecture">MemGPT Memory Architecture</h4>
+<div class="r-frame" style="padding: 0.1rem; background-color: rgba(0, 255, 136, 0.1); border-left: 3px solid #00ff88;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 15%">
+<col style="width: 22%">
+<col style="width: 20%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Memory Tier</th>
+<th style="text-align: left;">Location</th>
+<th style="text-align: left;">What is stored</th>
+<th style="text-align: left;">Agent Control</th>
+<th style="text-align: left;">Persistence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>🎯 Core Memory</strong></td>
+<td style="text-align: left;">Inside context</td>
+<td style="text-align: left;">User profile, persona</td>
+<td style="text-align: left;">Self-edit</td>
+<td style="text-align: left;">Bounded by context window</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>💭 Chat History</strong></td>
+<td style="text-align: left;">Inside context</td>
+<td style="text-align: left;">Recent message turns</td>
+<td style="text-align: left;">Auto-managed; summarized</td>
+<td style="text-align: left;">Context-window limited</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>🔍 Recall Memory</strong></td>
+<td style="text-align: left;">External DB</td>
+<td style="text-align: left;">Every evicted chat turn</td>
+<td style="text-align: left;">Search</td>
+<td style="text-align: left;">Unlimited</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>📚 Archival Memory</strong></td>
+<td style="text-align: left;">External store</td>
+<td style="text-align: left;">Docs, PDFs, references</td>
+<td style="text-align: left;">Read/write</td>
+<td style="text-align: left;">Unlimited</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>📊 Memory Stats</strong></td>
+<td style="text-align: left;">Inside context</td>
+<td style="text-align: left;">External stores</td>
+<td style="text-align: left;">Guides retrieval</td>
+<td style="text-align: left;">Tiny</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="memory-types" class="slide level2 small-font underline">
+<h2>Memory Types</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Business Updates&lt;br/&gt;&amp; Intelligence] --&gt; B[Executive Assistant&lt;br/&gt;Agent]
+    
+    B --&gt; C[🧠 Semantic&lt;br/&gt;Memory]
+    B --&gt; D[📚 Episodic&lt;br/&gt;Memory]
+    B --&gt; E[⚙️ Procedural&lt;br/&gt;Memory]
+    
+    C --&gt; C1[Executive priorities&lt;br/&gt;Team expertise&lt;br/&gt;Strategic initiatives]
+    D --&gt; D1[Past meeting outcomes&lt;br/&gt;Decision patterns&lt;br/&gt;Follow-up actions]
+    E --&gt; E1[Meeting protocols&lt;br/&gt;Briefing formats&lt;br/&gt;Escalation rules]
+    
+    C1 --&gt; F[Strategic Executive&lt;br/&gt;Briefing]
+    D1 --&gt; F
+    E1 --&gt; F
+    
+    F --&gt; G[Informed Leadership&lt;br/&gt;&amp; Clear Actions]
+    
+    %% Input sources
+    A -.-&gt; H[Market Intelligence]
+    A -.-&gt; I[Team Progress]
+    A -.-&gt; J[Solution Updates]
+    
+    H --&gt; B
+    I --&gt; B
+    J --&gt; B
+    
+    style B fill:#ffa500,stroke:#000,color:#000
+    style C fill:#87ceeb,stroke:#000,color:#000
+    style D fill:#98fb98,stroke:#000,color:#000
+    style E fill:#dda0dd,stroke:#000,color:#000
+    style F fill:#ff6b9d,stroke:#000,color:#000
+    style G fill:#00ff88,stroke:#000,color:#000
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Executive Intelligence:</strong> Like an experienced EA who knows what each executive cares about (semantic), recalls past decisions (episodic), and follows meeting protocols (procedural)</p>
+</div>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Agent Input] --&gt; B[Context Compilation]
+    
+    B --&gt; C[Context Window - Limited]
+    B --&gt; D[External Storage - Unlimited]
+    
+    C --&gt; C1[System Prompt]
+    C --&gt; C2[🎯 Core Memory&lt;br/&gt;Self-Editing]
+    C --&gt; C3[💭 Chat History&lt;br/&gt;Recent Messages]
+    C --&gt; C4[📊 Memory Statistics]
+    
+    D --&gt; D1[🔍 Recall Memory&lt;br/&gt;All Past Messages]
+    D --&gt; D2[📚 Archival Memory&lt;br/&gt;Documents &amp; Data]
+    
+    C2 -.-&gt;|Memory Tools| C2
+    C3 -.-&gt;|Overflow| D1
+    D1 -.-&gt;|Search Tool| C3
+    D2 -.-&gt;|Search Tool| C3
+    
+    style C fill:#ffa500,stroke:#000,color:#000
+    style D fill:#87ceeb,stroke:#000,color:#000
+    style C2 fill:#00ff88,stroke:#000,color:#000
+    style C3 fill:#98fb98,stroke:#000,color:#000
+    style D1 fill:#dda0dd,stroke:#000,color:#000
+    style D2 fill:#ff6b9d,stroke:#000,color:#000
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Technical Implementation:</strong> Core Memory (persona &amp; user profile) + Recall Memory (conversation history) + Archival Memory (document storage)</p>
+</div>
+</section>
+<section id="evals" class="slide level2 smaller center" data-background-color="#ffa500">
+<h2>Evals</h2>
+</section>
+<section id="evals-1" class="slide level2 small-font underline">
+<h2>Evals</h2>
+<p>It’s the systematic measurement of LLM pipeline quality. A good evaluation produces results that can be easily and unambiguously interpreted. It goes beyond a single number.</p>
+<p><br></p>
+<h3 id="classification-analysis">📊 Classification &amp; Analysis</h3>
+<p>Sentiment Analysis, Sector Classification, Document Segmentation, Entity Recognition</p>
+<h3 id="information-extraction">🔍 Information Extraction</h3>
+<p>Key Data Retrieval, Relationship Mapping, Pattern Recognition, Structured Data Conversion</p>
+<h3 id="content-synthesis">📝 Content Synthesis</h3>
+<p>Summarization, Multi-document Fusion, Narrative Construction, Abstract Generation</p>
+</section>
+<section id="types-of-evals" class="slide level2 small-font underline">
+<h2>Types of Evals</h2>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="reference-based-metrics">📋 Reference-Based Metrics</h3>
+<p><strong>Compare LLM output against known, ground-truth answer</strong></p>
+<p><em>Like having an official answer for a multiple-choice test</em></p>
+<p><strong>Simple Comparisons:</strong></p>
+<ul>
+<li><strong>Keyword Presence</strong> - Check required terms exist</li>
+<li><strong>BLEU/ROUGE</strong> - Text similarity to reference</li>
+</ul>
+<p><strong>Execution-Based:</strong></p>
+<ul>
+<li><strong>Unit Tests</strong> - Run generated code against test cases</li>
+<li><strong>API Calls</strong> - Verify correct endpoints and parameters</li>
+</ul>
+<p><em>Preferred when feasible - cheap to maintain and verify</em></p>
+</div><div class="column" style="width:50%;">
+<h3 id="reference-free-metrics">🔍 Reference-Free Metrics</h3>
+<p><strong>Evaluate based on inherent properties or rule-following</strong></p>
+<p><em>No “golden” answer - focus on validity and compliance</em></p>
+<p><strong>Rule Compliance:</strong></p>
+<ul>
+<li><strong>Safety Checks</strong> - No medical advice from chatbots</li>
+<li><strong>Code Quality</strong> - Includes explanatory comments</li>
+<li><strong>Content Rules</strong> - Summary doesn’t add speculation</li>
+</ul>
+<p><strong>Quality Assessment:</strong></p>
+<ul>
+<li><strong>LLM-as-Judge</strong> - Subjective quality evaluation</li>
+<li><strong>Toxicity Detection</strong> - Harmful content</li>
+</ul>
+<p><em>Crucial for subjective, creative, or multi-valid responses</em></p>
+</div></div>
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Cost Hierarchy:</strong> Start with cheap code-based checks → Reserve expensive LLM-as-Judge for persistent failures that can’t be captured by simple rules</p>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluation-dilemmas-yales-secondary-pe-sales" class="slide level2 small-font underline">
+<h2>Evaluation Dilemmas: Yale’s secondary PE sales</h2>
+<p><br></p>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Breaking:</strong> Yale University is close to finalising a landmark $2.5bn sale of private equity and venture capital</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:34%;">
+<h4 id="human-label-agreement">📊 Human Label Agreement</h4>
+<ul>
+<li><strong>Expert:</strong> <span style="background-color: #ffa500; color: black;"><strong>Negative</strong> (<strong>2</strong>)</span>, Neutral (1)</li>
+<li><strong>Model:</strong> <span style="background-color: #ffa500; color: black;"><strong>Positive</strong></span></li>
+<li><strong>Issue:</strong> <span style="background-color: #ffa500; color: black;"><strong>67%</strong></span> see distress vs optimistic AI</li>
+</ul>
+<div class="fragment">
+<p><strong>Fix:</strong> Require <span style="background-color: #00ff88; color: black;"><strong>80%+</strong></span> expert consensus</p>
+</div>
+</div><div class="column" style="width:33%;">
+<h4 id="eval-vs-human-disagreement">⚖️ Eval vs Human Disagreement</h4>
+<ul>
+<li><strong>LLM Score:</strong> <span style="background-color: #ffa500; color: black;"><strong>8.7/10</strong></span> (“thorough”)</li>
+<li><strong>Yale CIO:</strong> <span style="background-color: #ffa500; color: black;"><strong>3/10</strong></span> (“misses crisis”)</li>
+<li><strong>Issue:</strong> Ignores <span style="background-color: #ffa500; color: black;"><strong>30+ year</strong></span> precedent</li>
+</ul>
+<div class="fragment">
+<p><strong>Fix:</strong> Weight <span style="background-color: #00ff88; color: black;"><strong>institutional memory</strong></span> higher</p>
+</div>
+</div><div class="column" style="width:33%;">
+<h4 id="good-eval-bad-business">📈 Good Eval, Bad Business</h4>
+<ul>
+<li><strong>AI Accuracy:</strong> <span style="background-color: #ffa500; color: black;"><strong>96%</strong></span> correct on data monitoring</li>
+<li><strong>Reality:</strong> Peer confidence <span style="background-color: #ffa500; color: black;"><strong>-25%</strong></span></li>
+<li><strong>Issue:</strong> Missed <span style="background-color: #ffa500; color: black;"><strong>ecosystem impact</strong></span></li>
+</ul>
+<div class="fragment">
+<p><strong>Fix:</strong> Optimize for <span style="background-color: #00ff88; color: black;"><strong>industry impact</strong></span></p>
+</div>
+</div></div>
+</section>
+<section id="end" class="slide level2 smaller center">
+<h2>End</h2>
+<div style="text-align: center;">
+<p><img data-src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExamJnaTU1bjZ5cHNmMnU1a3R6aHA1dmUwYzNmbmdkbnB1NmJpbnNleSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iUOzkJmvnFfqM/giphy.gif" width="400"></p>
+</div>
+
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>🤖 Made by PAG ❤️</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
