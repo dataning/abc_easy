@@ -1,0 +1,60 @@
+/* css styles */
+.reveal .slides section {
+  font-size: 14pt;
+}
+
+.reveal .slides section p,
+.reveal .slides section li {
+  font-size: 16pt;
+}
+
+.reveal .slides section h1 {
+  font-size: 36pt;
+}
+
+.reveal .slides section h2 {
+  font-size: 28pt;
+}
+
+.reveal .slides section h3 {
+  font-size: 22pt;
+}
+
+/* now all highlighting classes at top level */
+.highlight-primary {
+  background-color: #00ff88;
+  color: black;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.highlight-secondary {
+  background-color: #4ecdc4;
+  color: black;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.highlight-accent {
+  background-color: #ffa500;
+  color: black;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+
+/* underline any H2 in a slide with the .underline class */
+.reveal .slides section.underline > h2 {
+  text-decoration: underline;
+}
+
+.reveal .slides section.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* vertical centering */
+  align-items: center;      /* horizontal centering */
+}
+
+.reveal .slides section.center > h2 {
+  text-align: center;
+}
