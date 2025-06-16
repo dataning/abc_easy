@@ -1,0 +1,739 @@
+---
+title: "Introduction to Agentic AI"
+subtitle: "GenAI Dojo 1"
+author: "[Ning Lu
+](https://linkedin.com/in/ninglu)"
+date: today
+format:
+  revealjs:
+    transition: slide
+    background-transition: fade
+    slide-number: true
+    incremental: false
+    chalkboard:
+      buttons: true
+    preview-links: auto
+    # logo: images/quarto.png
+    css: styles.css
+    theme: night
+    self-contained: false
+footer: |
+  🤖 Made by PAG ❤️ 
+---
+
+## Session Content {.small-font .underline}
+
+This presentation will cover some of the new thinking in agentic AI:
+
+1.	Hello, Agent
+2.  Mechanics
+3.	Agency vs. Control
+4.	Memory
+5.  Evals
+
+---
+
+## Hello, Agent {.smaller background-color="#00ff88" .center}
+
+---
+
+## What is Agentic AI? {.small-font .underline}
+
+Agentic AI describes systems that can [act autonomously]{style="background-color: #ff6b9d; color: black;"}, make decisions in a multi-step process, and take actions based on their own understanding of the world. This contrasts with traditional AI systems, which are typically designed to perform specific tasks or follow predefined rules as single-shot generators.
+
+Instead, agentic AI systems [break down tasks]{style="background-color: #ff6b9d; color: black;"} into manageable subtasks, [propose and refine intermediate solutions]{style="background-color: #4ecdc4; color: black;"}, and [solicit or incorporate feedback]{style="background-color: #ffe66d; color: black;"} at each stage**—creating an iterative, collaborative workflow**.
+
+Being agentic means thinking both at the individual level — focusing on [autonomy]{style="background-color: #a8e6cf; color: black;"}  and decision-making—and at the systemic level — understanding and engaging with broader [systems]{style="background-color: #c7ceea; color: black;"}.
+
+::: {style="text-align: center;"}
+![Pac-Man](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXQ4OW50YWJyb3hjZ3JnYThjcjhhZTd3MHZ1a2ZscWJ4bHB6dDhzNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/d9QiBcfzg64Io/giphy.gif){width=200}
+:::
+
+::: callout-tip
+Consider how PAG teams collaborates with PMG and other stakeholders throughout each phase — receiving requests, scoping requirements, planning and development, testing and validation, and finally showcasing outcomes — maintaining open communication and feedback every step of the way, much like team leads, project managers, and executives collaborating from initial brief to final delivery.
+:::
+
+---
+
+## Why should we bother? {.small-font .underline}
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(0, 255, 136, 0.1); border-left: 4px solid #00ff88;"}
+**Higher-Quality Outputs**
+
+*Avoid dumping an unvetted 1,000-word report. Instead, each chunk gets checked, so the output is more accurate*
+:::
+:::
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(135, 206, 235, 0.1); border-left: 4px solid #87ceeb;"}
+**Faster Turnaround**
+
+*Think of it like a relay race: while the AI polishes the executive summary, you can research supporting data*
+:::
+:::
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(255, 107, 157, 0.1); border-left: 4px solid #ff6b9d;"}
+**Transparent Reasoning**
+
+*You see the chain of reasoning — no more black-box outputs. It's easier to audit, trust, and debug*
+:::
+:::
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(221, 160, 221, 0.1); border-left: 4px solid #dda0dd;"}
+**Improved Collaboration Dynamics**
+
+*Instead of treating the AI as a magic text-generator, we engage it as a partner or a teammate*
+:::
+:::
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid #ffa500;"}
+**Scalable Expertise**
+
+*You can plug in specialist routines — legal review, style enforcement*
+:::
+:::
+
+---
+
+
+## Case: OCIO Endowment Research {.small-font .underline}
+
+<br>
+
+### Traditional GenAI
+
+```{mermaid}
+flowchart LR
+    A[News Search] --> B[Keywords]
+    B --> C[Batch Process]
+    C --> D[LLM - Sentiment Score]
+    D --> E[Email Alert]
+    
+    style A fill:#87ceeb,stroke:#000,color:#000
+    style B fill:#98fb98,stroke:#000,color:#000
+    style C fill:#dda0dd,stroke:#000,color:#000
+    style D fill:#ffa500,stroke:#000,color:#000
+    style E fill:#ff4444,stroke:#000,color:#fff
+```
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid #ffa500;"}
+**"Harvard endowment sentiment: -1"**
+**"Yale endowment sentiment: -1"**
+:::
+:::
+
+<br>
+
+### Agentic Research
+
+```{mermaid}
+flowchart LR
+    A[Research Query] --> B[Agent Planning]
+    B --> C[Multi-Source Intel]
+    C --> D[Contextual Analysis]
+    D --> E[Memory Integration]
+    E --> F[Self-Reflection]
+    E --> G[Summarization]
+    F --> H[Insight Generation]
+    G --> H
+    H --> I[Action Planning]
+    I --> J[Continuous Learning]
+    J --> E
+    
+    style A fill:#87ceeb,stroke:#000,color:#000
+    style B fill:#00ff88,stroke:#000,color:#000
+    style C fill:#98fb98,stroke:#000,color:#000
+    style D fill:#ffa500,stroke:#000,color:#000
+    style E fill:#dda0dd,stroke:#000,color:#000
+    style F fill:#ff6b9d,stroke:#000,color:#000
+    style G fill:#ffb347,stroke:#000,color:#000
+    style H fill:#ff4444,stroke:#000,color:#fff
+    style I fill:#87ceeb,stroke:#000,color:#000
+    style J fill:#90ee90,stroke:#000,color:#000
+```
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(0, 255, 136, 0.1); border-left: 4px solid #00ff88;"}
+
+**Harvard faces $43M annual excise tax burden = 860 full scholarships cut.**
+
+**Context:** Spend rate reduced 4.7% → 4.1% since 2019. Yale adopting similar defensive strategies.
+
+**Prediction:** Tuition dependency +12% above peers. Q3 lobbying spend likely +40%.
+
+**Action:** Monitor asset reallocation as well as bond issuance. Emergency spend rate cut probable if grant cuts exceed 15%.
+:::
+:::
+
+---
+
+## Mechanics {.smaller background-color="#dda0dd" .center}
+
+---
+
+## Mechanics of Agentic AI {.small-font}
+
+<br> 
+
+| Component | What It Does | Why It Matters |
+|-----------|----------------|------------------|
+| **Goal Decomposition** | Breaks tasks into manageable subtasks | Handles problems too big for single AI calls |
+| **Orchestration** | Coordinates multiple agents | Ensures agents collaborate instead of conflict |
+| **Memory Systems** | Persistent context across conversations | Learns from past, builds knowledge |
+| **Dynamic Adaptation** | Adjusts strategy based on results | Self-corrects when approaches aren't working |
+| **Evaluation Systems** | Continuous assessment and feedback | Ensures outputs meet standards and improve |
+
+<br> 
+
+::: columns
+::: {.column width="50%"}
+
+#### 🧩 Goal Decomposition {.underline}
+
+##### Break "Write market analysis" into:
+
+- Trend analysis  
+- Risk assessment
+- Executive summary
+
+#### 🔗 Orchestration {.underline}
+
+##### Coordinate multiple specialists:
+
+- Research agent finds data
+- Analysis agent interprets trends
+- Writing agent creates narrative
+:::
+
+::: {.column width="50%"}
+#### 🧠 Memory Systems{.underline}
+
+##### Remember across sessions:
+
+- Your preferences and style
+- Past analysis methods
+- Client-specific requirements
+
+#### ⚡ Dynamic Adaptation {.underline}
+
+##### Self-correct in real-time:
+
+- "This data source is outdated"
+- "Client prefers conservative estimates"
+- "Need more technical detail"
+:::
+:::
+
+---
+
+## From Single to Multi-Agent Systems {.small-font .underline}
+
+### Single Agent → Task Decomposition
+
+```{mermaid}
+flowchart LR
+    A[Task] --> B[Decomposer]
+    
+    B --> C[Subtask 1]
+    B --> D[Subtask 2]
+    
+    C --> E[Agent A]
+    D --> F[Agent B]
+    
+    E --> G[Result A]
+    F --> H[Result B]
+    
+    G --> I[Combiner]
+    H --> I
+    
+    I --> J[Final Output]
+    
+    style B fill:#00ff88,stroke:#000,color:#000
+    style E fill:#87ceeb,stroke:#000,color:#000
+    style F fill:#87ceeb,stroke:#000,color:#000
+    style I fill:#dda0dd,stroke:#000,color:#000
+```
+
+### Multi-Agent → Memory & Orchestration
+
+```{mermaid}
+flowchart LR
+    A[Complex Task] --> B[Orchestrator]
+    
+    B --> C[Decomposer]
+    C --> D[Agent 1]
+    C --> E[Agent 2]
+    
+    D --> F[Context 1]
+    E --> G[Context 2]
+    
+    F --> H[Memory Store]
+    G --> H
+    
+    H --> I[State Manager]
+    I --> J[Reflection Engine]
+    
+    J --> K[Quality Review]
+    K -->|Pass| L[Results Integrator]
+    K -->|Iterate| B
+    
+    L --> M[Final Deliverable]
+    
+    %% Memory and state connections
+    H -.-> F
+    H -.-> G
+    I -.-> D
+    I -.-> E
+    J -.-> B
+    
+    style B fill:#00ff88,stroke:#000,color:#000
+    style C fill:#4ecdc4,stroke:#000,color:#000
+    style D fill:#87ceeb,stroke:#000,color:#000
+    style E fill:#87ceeb,stroke:#000,color:#000
+    style H fill:#ffa500,stroke:#000,color:#000
+    style I fill:#ff6b9d,stroke:#000,color:#000
+    style J fill:#dda0dd,stroke:#000,color:#000
+    style K fill:#ffb347,stroke:#000,color:#000
+    style L fill:#98fb98,stroke:#000,color:#000
+```
+
+### Advanced Multi-Agent → Specialized Workflows
+
+```{mermaid}
+flowchart LR
+    A["What's today's top AI news?"] --> B[Orchestrator]
+
+    B --> C[Decomposer]
+    C --> D1[Topic Discovery<br/>Agent]
+    C --> D2[Source Selector<br/>Agent]
+
+    D1 --> E1[Context: Trends]
+    D2 --> E2[Context: RSS & APIs]
+
+    E1 --> F[Context Store]
+    E2 --> F
+
+    F --> G[State Manager]
+    G --> H1[Fetch & Normalize<br/>Agent]
+    G --> H2[Dedup & Cluster<br/>Agent]
+
+    H1 --> I1[Raw Articles]
+    H2 --> I2[Article Clusters]
+
+    I1 --> J1[Semantic Rank<br/>Agent]
+    I2 --> J2[Summary<br/>Agent]
+
+    J1 --> K[Memory Store]
+    J2 --> K
+
+    K --> L[Reflection Engine]
+    L --> M{Quality Check}
+    M -->|OK| N[Results Integrator]
+    M -->|Bad| O[Feedback<br/>to Orchestrator]
+    O --> B
+
+    N --> P[Personalized Digest]
+
+    %% Styling
+    style B fill:#00ff88,stroke:#000,color:#000
+    style C fill:#4ecdc4,stroke:#000,color:#000
+    style D1 fill:#87ceeb,stroke:#000,color:#000
+    style D2 fill:#87ceeb,stroke:#000,color:#000
+    style H1 fill:#87ceeb,stroke:#000,color:#000
+    style H2 fill:#87ceeb,stroke:#000,color:#000
+    style J1 fill:#87ceeb,stroke:#000,color:#000
+    style J2 fill:#87ceeb,stroke:#000,color:#000
+    style F fill:#fff2e6,stroke:#ffa500
+    style K fill:#ffa500,stroke:#000,color:#000
+    style G fill:#ff6b9d,stroke:#000,color:#000
+    style L fill:#dda0dd,stroke:#000,color:#000
+    style M fill:#ffb347,stroke:#000,color:#000
+    style N fill:#98fb98,stroke:#000,color:#000
+```
+
+::: {.callout-tip icon="🚀" appearance="simple"}
+**Evolution:** Simple task splitting → Memory-driven coordination → Specialized agent ecosystems with feedback loops
+:::
+
+---
+
+## Agency vs. Control {.smaller background-color="#ff4444" .center}
+
+---
+
+## Control Flow vs Agentic {.small-font}
+
+| Question | Control-flow solution | Agentic solution |
+|----------|----------------------|------------------|
+| **Who decides what happens next?** | You, at design time. The order of operations is hard-coded. | The agent decides at run-time, typically after reasoning with an LLM or other planner. |
+| **Source of goals** | External: the caller supplies every input and every branch point. | Internal: the agent interprets a high-level goal, sets sub-goals, and may even rewrite its own plan. |
+| **Granularity of components** | Functions or tasks wired together by explicit calls (`foo(); bar();`). | Autonomous agents that expose a "toolbox" and negotiate with each other. |
+| **Primary abstractions** | Loops, if/else, explicit orchestration, workflow DAGs. | plan-act-observe loop, reflection chains, dynamic tool selection. |
+| **Predictability** | Highly deterministic. Same inputs ⇒ same path. | Stochastic. Tempered by guard-rails, but the path can vary between runs. |
+| **Testing style** | Unit & integration tests over fixed call graphs. | Simulation, sandbox runs, and behavioral assertions (e.g. "never call the payment API unless estimate ≥ $100"). |
+| **When to use** | ETL pipelines, billing, compliance tasks, anything with regulatory requirements | Research assistants, dynamic data aggregation, automated ops runbooks, user-facing chatbots that need to improvise
+
+
+::: {.notes}
+This table highlights the fundamental differences between traditional control-flow programming and agentic AI systems.
+:::
+
+## Control Flow vs Agentic - Code Difference {.small-font}
+
+::: columns
+
+::: {.column width="50%"}
+**Control Flow Approach**
+```python
+def run_pipeline(data):
+    cleaned = clean(data)
+    features = featurize(cleaned)
+    model = load_model()
+    predictions = model.predict(features)
+    return postprocess(predictions)
+```
+:::
+
+::: {.column width="50%"}
+**Agentic Approach**
+```python
+from autogen import AssistantAgent, Tool
+
+# Each tool is an explicit skill you let the agent call
+tools = [
+    Tool(name="search_web", fn=search_web),
+    Tool(name="summarize", fn=summarize),
+]
+
+agent = AssistantAgent(
+    name="Researcher",
+    objective="Write a one-page market brief on solar-powered IoT devices",
+    tools=tools,
+    reflexion=True,      
+    max_steps=15
+)
+
+agent.run()               
+```
+:::
+:::
+
+::: {.notes}
+Left side shows deterministic, hard-coded flow. Right side shows goal-oriented, self-directing agent.
+:::
+
+## Quick Check: Control Flow or Agentic? {.small-font}
+
+| Check | If you answer YES you're probably... |
+|------------------------------|-------------------|
+| "Do I know exactly which function will be called second?" | **Control flow** |
+| "Could an LLM decide whether to call the database or the vector store?" | **Agentic** |
+| "Can the system set a brand-new sub-goal I didn't anticipate?" | **Agentic** |
+| "Can I write a unit test that walks every path?" | **Control flow** |
+| "Is reproducibility more important than creativity?" | **Control flow** |
+
+::: {style="text-align: center;"}
+![Agentic AI Workflow](https://miro.medium.com/v2/resize:fit:960/1*jrwWTfkHEVRBwTVZ5amkBQ.gif){width=600}
+:::
+
+::: {.fragment}
+**Key Takeaway 1**: Control flow = predictable paths, Agentic = adaptive decisions
+:::
+
+::: {.fragment}
+**Key Takeaway 2**: The fundamental trade-off between control and freedom shapes your architecture choice
+:::
+
+::: {.notes}
+This checklist helps determine whether your system design leans toward traditional control flow or agentic AI patterns.
+:::
+
+---
+
+## Memory {.smaller background-color="#ff6b9d" .center}
+
+---
+
+### Memory: From Scratch to Strategy {.small-font .underline}
+
+```{mermaid}
+flowchart TB
+    A[🧠 Brain Only] --> B[GenAI]
+    C[📓 Notepad + Brain] --> D[Agentic AI - 1]
+    E[💻 Laptop + Brain] --> F[Agentic AI - 2]
+    
+    style A fill:#87ceeb,stroke:#000,color:#000
+    style B fill:#ff6b9d,stroke:#000,color:#000
+    style C fill:#00ff88,stroke:#000,color:#000
+    style D fill:#ffa500,stroke:#000,color:#000
+    style E fill:#dda0dd,stroke:#000,color:#000
+    style F fill:#ff4444,stroke:#000,color:#fff
+```
+
+::: columns
+::: {.column width="35%"}
+*Forgettable*
+
+- 🛑 Restart every time
+- 🔍 Lose context
+:::
+
+::: {.column width="35%"}
+*Continuous*  
+
+- 📖 Recall past notes
+- ⚙️ Build on history
+:::
+
+::: {.column width="30%"}
+*Insightful*  
+
+- 🔎 Search archives
+- 🔗 Cross-ref data
+:::
+:::
+
+::: {.callout-tip icon="🎯" appearance="simple"}
+**Notebook wins meetings. AI memory wins workflows.**
+:::
+
+
+---
+
+## Memory Evolution {.small-font}
+
+#### Langchain Memory Types {.small-font .underline}
+
+::: {.r-frame style="padding: 0.1rem; background-color: rgba(135, 206, 235, 0.1); border-left: 3px solid #87ceeb;"}
+| Memory Type | What is stored | Examples | Limitations |
+|:-------|:----------------|:--------------|:------------|
+| **🧠 Semantic** | Facts & knowledge baked into prompt | "Capital of France = Paris"<br/>"User prefers metric units" | Fixed; no self-editing once deployed |
+| **📚 Episodic** | Time-stamped experiences & events | "2025-06-10: user booked flight" | Lives only until context window overflows |
+| **⚙️ Procedural** | Rules, skills, system instructions | "Always answer in JSON"<br/>"Obey brand style-guide" | Hard-coded behaviour; edits require redeploy |
+:::
+
+<br>
+
+#### MemGPT Memory Architecture {.small-font .underline}
+
+::: {.r-frame style="padding: 0.1rem; background-color: rgba(0, 255, 136, 0.1); border-left: 3px solid #00ff88;"}
+| Memory Tier | Location | What is stored | Agent Control | Persistence |
+|:----------------|:-----------|:-----------------|:---------------|:----------------|
+| **🎯 Core Memory** | Inside context | User profile, persona | Self-edit| Bounded by context window |
+| **💭 Chat History** | Inside context | Recent message turns | Auto-managed; summarized | Context-window limited |
+| **🔍 Recall Memory** | External DB | Every evicted chat turn | Search | Unlimited |
+| **📚 Archival Memory** | External store | Docs, PDFs, references | Read/write | Unlimited |
+| **📊 Memory Stats** | Inside context |External stores | Guides retrieval | Tiny|
+:::
+
+---
+
+## Memory Types {.small-font .underline}
+
+```{mermaid}
+flowchart LR
+    A[Business Updates<br/>& Intelligence] --> B[Executive Assistant<br/>Agent]
+    
+    B --> C[🧠 Semantic<br/>Memory]
+    B --> D[📚 Episodic<br/>Memory]
+    B --> E[⚙️ Procedural<br/>Memory]
+    
+    C --> C1[Executive priorities<br/>Team expertise<br/>Strategic initiatives]
+    D --> D1[Past meeting outcomes<br/>Decision patterns<br/>Follow-up actions]
+    E --> E1[Meeting protocols<br/>Briefing formats<br/>Escalation rules]
+    
+    C1 --> F[Strategic Executive<br/>Briefing]
+    D1 --> F
+    E1 --> F
+    
+    F --> G[Informed Leadership<br/>& Clear Actions]
+    
+    %% Input sources
+    A -.-> H[Market Intelligence]
+    A -.-> I[Team Progress]
+    A -.-> J[Solution Updates]
+    
+    H --> B
+    I --> B
+    J --> B
+    
+    style B fill:#ffa500,stroke:#000,color:#000
+    style C fill:#87ceeb,stroke:#000,color:#000
+    style D fill:#98fb98,stroke:#000,color:#000
+    style E fill:#dda0dd,stroke:#000,color:#000
+    style F fill:#ff6b9d,stroke:#000,color:#000
+    style G fill:#00ff88,stroke:#000,color:#000
+```
+
+::: {.fragment}
+**Executive Intelligence:** Like an experienced EA who knows what each executive cares about (semantic), recalls past decisions (episodic), and follows meeting protocols (procedural)
+:::
+
+```{mermaid}
+flowchart LR
+    A[Agent Input] --> B[Context Compilation]
+    
+    B --> C[Context Window - Limited]
+    B --> D[External Storage - Unlimited]
+    
+    C --> C1[System Prompt]
+    C --> C2[🎯 Core Memory<br/>Self-Editing]
+    C --> C3[💭 Chat History<br/>Recent Messages]
+    C --> C4[📊 Memory Statistics]
+    
+    D --> D1[🔍 Recall Memory<br/>All Past Messages]
+    D --> D2[📚 Archival Memory<br/>Documents & Data]
+    
+    C2 -.->|Memory Tools| C2
+    C3 -.->|Overflow| D1
+    D1 -.->|Search Tool| C3
+    D2 -.->|Search Tool| C3
+    
+    style C fill:#ffa500,stroke:#000,color:#000
+    style D fill:#87ceeb,stroke:#000,color:#000
+    style C2 fill:#00ff88,stroke:#000,color:#000
+    style C3 fill:#98fb98,stroke:#000,color:#000
+    style D1 fill:#dda0dd,stroke:#000,color:#000
+    style D2 fill:#ff6b9d,stroke:#000,color:#000
+```
+
+::: {.fragment}
+**Technical Implementation:** Core Memory (persona & user profile) + Recall Memory (conversation history) + Archival Memory (document storage)
+:::
+
+---
+
+## Evals {.smaller background-color="#ffa500" .center}
+
+---
+
+## Evals {.small-font .underline}
+
+It’s the systematic measurement of LLM pipeline quality. A good evaluation produces results that can be easily and unambiguously interpreted. It goes beyond a single number.
+
+<br>
+
+### 📊 Classification & Analysis
+Sentiment Analysis, Sector Classification, Document Segmentation, Entity Recognition
+
+### 🔍 Information Extraction  
+Key Data Retrieval, Relationship Mapping, Pattern Recognition, Structured Data Conversion
+
+### 📝 Content Synthesis
+Summarization, Multi-document Fusion, Narrative Construction, Abstract Generation
+
+---
+
+## Types of Evals {.small-font .underline}
+
+<br>
+
+::: columns
+::: {.column width="50%"}
+### 📋 Reference-Based Metrics
+**Compare LLM output against known, ground-truth answer**
+
+*Like having an official answer for a multiple-choice test*
+
+**Simple Comparisons:**
+
+- **Keyword Presence** - Check required terms exist
+- **BLEU/ROUGE** - Text similarity to reference
+
+**Execution-Based:**
+
+- **Unit Tests** - Run generated code against test cases
+- **API Calls** - Verify correct endpoints and parameters
+
+*Preferred when feasible - cheap to maintain and verify*
+:::
+
+::: {.column width="50%"}
+### 🔍 Reference-Free Metrics
+**Evaluate based on inherent properties or rule-following**
+
+*No "golden" answer - focus on validity and compliance*
+
+**Rule Compliance:**
+
+- **Safety Checks** - No medical advice from chatbots
+- **Code Quality** - Includes explanatory comments
+- **Content Rules** - Summary doesn't add speculation
+
+**Quality Assessment:**
+
+- **LLM-as-Judge** - Subjective quality evaluation
+- **Toxicity Detection** - Harmful content
+
+*Crucial for subjective, creative, or multi-valid responses*
+:::
+:::
+
+::: {.callout-tip icon="💰" appearance="simple"}
+**Cost Hierarchy:** Start with cheap code-based checks → Reserve expensive LLM-as-Judge for persistent failures that can't be captured by simple rules
+:::
+
+---
+
+## Evaluation Dilemmas: Yale's secondary PE sales {.small-font .underline}
+
+<br> 
+
+::: {.callout-important icon="📰" appearance="simple"}
+**Breaking:** Yale University is close to finalising a landmark $2.5bn sale of private equity and venture capital
+:::
+
+<br> 
+
+::: columns
+::: {.column width="34%"}
+
+#### 📊 Human Label Agreement
+
+- **Expert:** [**Negative** (**2**)]{style="background-color: #ffa500; color: black;"}, Neutral (1) 
+- **Model:** [**Positive**]{style="background-color: #ffa500; color: black;"}
+- **Issue:** [**67%**]{style="background-color: #ffa500; color: black;"} see distress vs optimistic AI
+
+::: {.fragment}
+**Fix:** Require [**80%+**]{style="background-color: #00ff88; color: black;"} expert consensus
+:::
+:::
+
+::: {.column width="33%"}
+#### ⚖️ Eval vs Human Disagreement
+
+- **LLM Score:** [**8.7/10**]{style="background-color: #ffa500; color: black;"} ("thorough")
+- **Yale CIO:** [**3/10**]{style="background-color: #ffa500; color: black;"} ("misses crisis")
+- **Issue:** Ignores [**30+ year**]{style="background-color: #ffa500; color: black;"} precedent
+
+::: {.fragment}
+**Fix:** Weight [**institutional memory**]{style="background-color: #00ff88; color: black;"} higher
+:::
+:::
+
+::: {.column width="33%"}
+#### 📈 Good Eval, Bad Business
+
+- **AI Accuracy:** [**96%**]{style="background-color: #ffa500; color: black;"} correct on data monitoring
+- **Reality:** Peer confidence [**-25%**]{style="background-color: #ffa500; color: black;"}
+- **Issue:** Missed [**ecosystem impact**]{style="background-color: #ffa500; color: black;"}
+
+::: {.fragment}
+**Fix:** Optimize for [**industry impact**]{style="background-color: #00ff88; color: black;"}
+:::
+:::
+:::
+
+---
+
+## End {.smaller .center}
+
+::: {style="text-align: center;"}
+![](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExamJnaTU1bjZ5cHNmMnU1a3R6aHA1dmUwYzNmbmdkbnB1NmJpbnNleSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iUOzkJmvnFfqM/giphy.gif){width=400}
+:::
+
