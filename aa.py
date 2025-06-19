@@ -75,9 +75,22 @@ def execute_async_request():
         headers=generate_headers(),
         json=CHAT_COMPLETION_REQUEST
     )
-
+    
+    # Check if the POST request was successful
+    if response_post.status_code != 200:
+        raise Exception(f"POST request failed with status {response_post.status_code}: {response_post.text}")
+    
+    # Parse response and check for 'id' key
+    try:
+        post_response_data = response_post.json()
+    except ValueError as e:
+        raise Exception(f"Failed to parse POST response as JSON: {e}")
+    
+    if 'id' not in post_response_data:
+        raise Exception(f"POST response missing 'id' field. Response: {post_response_data}")
+    
     # Extract operation ID
-    operation_id = response_post.json()['id']
+    operation_id = post_response_data['id']
     operation_url = f"{LONG_RUNNING_URL}/{operation_id}"
 
     # Wait for results with retries
@@ -89,10 +102,23 @@ def execute_async_request():
             operation_url,
             auth=HTTPBasicAuth(USERNAME, PASSWORD),
             headers=generate_headers()
-        ).json()
+        )
+        
+        # Check if GET request was successful
+        if result_response.status_code != 200:
+            print(f"Warning: GET request failed with status {result_response.status_code}")
+            time.sleep(wait_time)
+            continue
+            
+        try:
+            result_data = result_response.json()
+        except ValueError:
+            print("Warning: Failed to parse GET response as JSON")
+            time.sleep(wait_time)
+            continue
 
-        if result_response.get('done'):
-            return result_response
+        if result_data.get('done'):
+            return result_data
 
         time.sleep(wait_time)
 
