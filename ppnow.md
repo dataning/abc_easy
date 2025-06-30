@@ -1,30 +1,93 @@
-Mid-Year Review 2025
+Framework
+Complexity (Rank)
+Strengths
+Weaknesses
+Key Capabilities
+Why Use Here
+What to Pay Attention To
+Real-Estate Examples
+Factor Model
+⭐️ (Simplest)
+• Drastically reduces dimensionality• Well understood by quants• Transparent loadings
+• Latent factors may lack intuitive labels• Loadings shift over time
+• PCA/FA to extract 3–6 core “risk drivers”• Risk attribution per asset/factor
+Rapidly collapse 20+ ML metrics (LTV, DSCR, cap-rate forecasts) plus sentiment-scores into a few core factors for PMs to track
+• Verify that the factors map to business concepts (e.g., “market momentum”)• Re-run loadings each quarter to guard against regime shifts
+• Factor 1: “Macro Rate & News Sentiment” combines interest-rate forecast and central bank speech tone• Factor 2: “Tenant Health” driven by DSCR, vacancy forecasts, and LLM-flagged complaint topics
+Ensemble Trees (RF/GBM)
+⭐️⭐️
+• Handles mixed numeric/text features naturally• Captures nonlinearities• Built-in feature importance
+• Often “black-box” without explainers• Can overfit if not tuned carefully
+• High-accuracy risk‐score prediction• Ranking of signal importance
+Ideal for generating a daily risk‐score for each property by learning from historical defaults, with clear ranking of which indicators (e.g., negative news spikes) drive risk
+• Use SHAP or LIME to translate splits into manager‐friendly narratives• Regularly validate out‐of‐sample performance to avoid drift
+• Train model on historical rent-default events using inputs: vacancy forecasts (ML), tenant sentiment score (LLM), local market news polarity (LLM), loan terms (ML)
+Hierarchical (Multilevel) Modeling
+⭐️⭐️⭐️
+• Mirrors natural levels (portfolio → region → asset)• Allows cross-level inference• Retains both macro & micro effects
+• Requires well-structured hierarchy• Model specification can be tricky
+• Estimates both global and subgroup effects• Integrates text & numbers at each level
+Perfect to embed sentiment from national-/city-level news (LLM) into regional risk, then into each building’s ML-based health score
+• Ensure enough data per level (e.g., >30 properties per region)• Watch for collinearity between levels (e.g., regional sentiment vs. property‐level features)
+• Level 1: national economic sentiment (LLM)• Level 2: submarket vacancy forecast (ML)• Level 3: building‐level DSCR and property‐inspection summary sentiment (LLM)
+Bayesian Network
+⭐️⭐️⭐️⭐️
+• Explicit uncertainty quantification• Intuitive DAG visualization• “What-if” querying
+• DAG structure is subjective• Inference scales poorly with node count
+• Probabilistic inference• Root-cause diagnosis• Scenario planning
+Enables a “digital twin” of your risk ecosystem—e.g., update probability of default when a major zoning change (LLM) is detected
+• Elicit structure from both data and domain experts• Limit nodes to ~15–20 key indicators to keep inference tractable
+• Node examples: “Negative tenant sentiment” → “Higher vacancy forecast” → “Lower DSCR” → “Elevated default risk”
+Causal Inference
+⭐️⭐️⭐️⭐️⭐️ (Most Complex)
+• Identifies true cause-effect• Provides direct intervention guidance• Eliminates spurious links
+• Heavy data requirements• Strong, hard-to-test assumptions
+• Treatment-effect estimation• Policy-impact forecasting
+Essential for capital‐allocation questions (“Will a £5 m energy-upgrade reduce churn?”) where you need evidence beyond correlation
+• Secure natural experiments or panel data• Rigorously test instrumental variables or parallel-trend assumptions
+• Apply Difference-in-Differences: properties that underwent a sustainability retrofit vs. similar controls to measure effect on lease-renewal rates• Use causal forests to quantify heterogeneity by tenant segment
 
-Top Achievements:
-	1.	Centralized Commentary Solution (CommentaryAgent): Successfully delivered a centralized commentary solution, integrating PAG workflows into Aladdin and PMG systems. Achieved substantial stakeholder buy-in from ESA, CBA, APM, PMG Tech, and AI Engineering teams, overcoming significant initial resistance. Notable collaborations include SAE testing partnerships, MASS COO governance improvements, BII portfolio engagement, and strategic alignment with key stakeholders such as Jacky, Bryan, Nish, and Kristen.
-	2.	Alturo Platform Launch: Officially launched Alturo, significantly transforming MASS OCIO client prospecting. Grew the asset-owner database from 200 to 10,000 records, introducing a powerful GenAI-driven “search intelligence” feature. Resulted in double-digit user growth and substantial recognition from MASS leadership (Edward, Alyson, Gabriella).
-	3.	STANZA Transition Management: Executed a smooth transition of STANZA Aladdin Climate to ASA while maintaining strong support for STANZA MSCI. Achieved positive stakeholder feedback from MASS (Dan) and RQA (Mari), highlighting strong execution and stakeholder management capabilities.
-	4.	Strategic Advisory for Matchmaking Initiative: Provided key technical advisory on data quality, matching algorithms, and AI integration, developing a high-impact dashboard for BLK product visualization. Established PAG as a central strategic partner with Mari and PMG Tech, influencing broader CIO-level AI discussions.
-	5.	Falcon Project Acquisition: Successfully secured the Falcon project, expanding PAG’s partnership with DPO, Multi-Alts, and AI Lab. Enhanced the team’s credibility within MASS and private markets.
 
-Contribution to PAG/AFE/BLK Ecosystem:
-	•	Delivered productivity-enhancing tools (Tasko, attention allocator, GenAI report generator, OCIO templates, PowerPoint GPT), supporting broader efficiency and innovation.
-	•	Initiated comprehensive GenAI educational programs across PAG, coordinating closely with BII and AFE teams, fostering greater strategic alignment and knowledge sharing.
-	•	Actively contributed to thought leadership through regular articles in Analytics Insider, enhancing internal knowledge dissemination.
-	•	Expanded the team’s strategic presence and engagement firm-wide, notably through partnerships and collaborative initiatives with Ji Sun, Adam, Adam P, and other senior leaders.
+How to Proceed
+	1.	Immediately: Run a small Factor Model on your combined indicator set to produce 3–5 risk factors for PM dashboards.
+	2.	Short‐Term: Build an Ensemble Tree model to generate daily risk scores and rank which signals (numeric vs. text) drive most risk.
+	3.	Medium‐Term: Define your portfolio hierarchy and deploy a Multilevel Model—blending national/regional sentiment with asset-level ML scores—to show risk “waterfalls” from macro to micro.
+	4.	Selective Deep Dive: For flagship assets or major strategic bets, construct a Bayesian Network for scenario planning; reserve Causal Inference for next year’s ROI studies on key interventions.
 
-Areas for Improvement (Addressable by Year-End):
-	•	Matchmaking Initiative Alignment: While strategic relationships and technical advisory have progressed positively, initial uncertainty around resource allocation slowed momentum. Improved clarity and proactive stakeholder alignment early in project lifecycles could further streamline future engagements.
-	•	CommentaryAgent Integration Resistance: Although significant integration progress has been made, initial resistance across certain teams (PMG Tech, APM, Aladdin) required extensive negotiation. Moving forward, proactive stakeholder communication and clearer articulation of benefits could mitigate resistance early.
-	•	Productivity Tool Adoption: Despite delivering productivity solutions, adoption within PAG remains incremental. Enhancing visibility, internal marketing, and targeted user training could boost broader adoption and impact by year-end.
 
-People Management:
 
-What Went Well:
-	•	Effectively managed leadership transitions, empowering Hajk and Joy in summer hiring coordination. Their proactive engagement has enabled sustainable delegation and supported analyst development.
-	•	Successfully tailored management approaches to direct reports (Ciaran and Joy), maximizing their strengths and addressing individual developmental needs. Joy notably increased project involvement and focus, improving overall team productivity.
-	•	Strengthened internal relationships through proactive engagement across senior stakeholders (Jacky, Ishan) and junior team members, fostering greater internal collaboration, trust, and strategic alignment.
+Slide Title: ML & LLM Evaluation + Governance ― One-Page Executive View
 
-Areas to Improve:
-	•	Addressing occasional misalignment in corporate behaviors, particularly with Ciaran, through consistent, clear feedback and structured developmental conversations could further enhance team cohesion.
-	•	Further refining mentorship methods and consistency in guidance, particularly for newer team members like Eleanor, would ensure balanced growth, clarity in expectations, and stronger overall professional development outcomes.
+⸻
+
+1 . Evaluation Stack
+
+▪ Data → Model → Deployment → Monitoring
+	•	Data Quality – completeness, bias, lineage, PII checks
+	•	Model Performance – accuracy/ROUGE/BLEU (ML), truthfulness/fact-recall (LLM)
+	•	Robustness & Stress-Tests – adversarial inputs, domain shifts
+	•	Fairness & Ethics – disparate-impact metrics, toxicity screens
+	•	Explainability – SHAP, attention maps, chain-of-thought audits
+	•	Continuous Monitoring – drift alarms, human feedback loops, incident logs
+
+2 . Governance Pillars
+
+Pillar	Key Artefacts & Controls
+People & Roles	Model Owner • Responsible AI Officer • Red-Team Lead
+Policy & Standards	Model-Risk Tiers, Secure SDLC, RLHF/RTBF guidelines
+Process Gates	Data-Use Approval → Model Card → Pre-Prod Sign-off → Launch Go/No-Go
+Documentation	Datasheets • System Cards • Change-Logs • Audit Trails
+Oversight	Cross-functional AI Governance Council; quarterly attestations
+
+3 . Key Guardrails for Real-Estate Portfolio Context
+	•	Numerical ML indicators: enforce feature versioning; verify against historical market regimes
+	•	Text / Transcript LLM signals: mandate factual-consistency evals (e.g., retrieval-augmented truth checks)
+	•	Decision Transparency: link every automated risk score to explainable factors for PM review
+	•	Regulatory Alignment: EU AI Act (high-risk), NYDFS 500.3, forthcoming UK AI regulation
+
+4 . Success Checklist
+
+✅  Metric dashboard live & owned  ✅  Red-team playbook executed quarterly
+✅  Model cards stored in central repo ✅  Alert-to-action SLA ≤ 24 h
+
+(Speaker note: finish by emphasizing that evaluation without governance is brittle, and governance without quantitative evaluation is blind.)
