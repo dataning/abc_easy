@@ -11,7 +11,7 @@ client = OpenAI(
 def stream_response(prompt: str):
     """Stream a response from the LLM"""
     response = client.chat.completions.create(
-        model="your-model",  # Replace with your actual model name
+        model="gemma-3n-e4b-it-mlx",  # Replace with your actual model name
         messages=[{"role": "user", "content": prompt}],
         stream=True
     )

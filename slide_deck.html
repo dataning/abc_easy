@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/tabby.min.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.31">
+<script src="slide_deck_files/libs/clipboard/clipboard.min.js"></script>
+<script src="slide_deck_files/libs/quarto-html/tabby.min.js"></script>
+<script src="slide_deck_files/libs/quarto-html/popper.min.js"></script>
+<script src="slide_deck_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="slide_deck_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="slide_deck_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="slide_deck_files/libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
 
   <meta name="author" content="Ning Lu">
-  <meta name="dcterms.date" content="2025-06-16">
-  <title>agent_blk – Introduction to Agentic AI</title>
+  <meta name="dcterms.date" content="2025-07-06">
+  <title>Introduction to Agentic AI</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="slide_deck_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="slide_deck_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -96,14 +96,14 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-00033b64c7f4405b1251d0bf85080562.css">
+  <link rel="stylesheet" href="slide_deck_files/libs/revealjs/dist/theme/quarto-00033b64c7f4405b1251d0bf85080562.css">
   <link rel="stylesheet" href="styles.css">
-  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="slide_deck_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="slide_deck_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="slide_deck_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="slide_deck_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="slide_deck_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="slide_deck_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -191,9 +191,9 @@
       margin-right: 0; 
     }
   </style>
-  <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+  <script src="slide_deck_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="slide_deck_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="slide_deck_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
@@ -211,7 +211,7 @@
 </div>
 </div>
 
-  <p class="date">2025-06-16</p>
+  <p class="date">2025-07-06</p>
 </section>
 <section id="session-content" class="slide level2 small-font underline">
 <h2>Session Content</h2>
@@ -677,31 +677,31 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Control Flow Approach</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="kw">def</span> run_pipeline(data):</span>
-<span id="cb1-2"><a></a>    cleaned <span class="op">=</span> clean(data)</span>
-<span id="cb1-3"><a></a>    features <span class="op">=</span> featurize(cleaned)</span>
-<span id="cb1-4"><a></a>    model <span class="op">=</span> load_model()</span>
-<span id="cb1-5"><a></a>    predictions <span class="op">=</span> model.predict(features)</span>
-<span id="cb1-6"><a></a>    <span class="cf">return</span> postprocess(predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="kw">def</span> run_pipeline(data):</span>
+<span id="cb1-2"><a href=""></a>    cleaned <span class="op">=</span> clean(data)</span>
+<span id="cb1-3"><a href=""></a>    features <span class="op">=</span> featurize(cleaned)</span>
+<span id="cb1-4"><a href=""></a>    model <span class="op">=</span> load_model()</span>
+<span id="cb1-5"><a href=""></a>    predictions <span class="op">=</span> model.predict(features)</span>
+<span id="cb1-6"><a href=""></a>    <span class="cf">return</span> postprocess(predictions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
 <p><strong>Agentic Approach</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> autogen <span class="im">import</span> AssistantAgent, Tool</span>
-<span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a><span class="co"># Each tool is an explicit skill you let the agent call</span></span>
-<span id="cb2-4"><a></a>tools <span class="op">=</span> [</span>
-<span id="cb2-5"><a></a>    Tool(name<span class="op">=</span><span class="st">"search_web"</span>, fn<span class="op">=</span>search_web),</span>
-<span id="cb2-6"><a></a>    Tool(name<span class="op">=</span><span class="st">"summarize"</span>, fn<span class="op">=</span>summarize),</span>
-<span id="cb2-7"><a></a>]</span>
-<span id="cb2-8"><a></a></span>
-<span id="cb2-9"><a></a>agent <span class="op">=</span> AssistantAgent(</span>
-<span id="cb2-10"><a></a>    name<span class="op">=</span><span class="st">"Researcher"</span>,</span>
-<span id="cb2-11"><a></a>    objective<span class="op">=</span><span class="st">"Write a one-page market brief on solar-powered IoT devices"</span>,</span>
-<span id="cb2-12"><a></a>    tools<span class="op">=</span>tools,</span>
-<span id="cb2-13"><a></a>    reflexion<span class="op">=</span><span class="va">True</span>,      </span>
-<span id="cb2-14"><a></a>    max_steps<span class="op">=</span><span class="dv">15</span></span>
-<span id="cb2-15"><a></a>)</span>
-<span id="cb2-16"><a></a></span>
-<span id="cb2-17"><a></a>agent.run()               </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">from</span> autogen <span class="im">import</span> AssistantAgent, Tool</span>
+<span id="cb2-2"><a href=""></a></span>
+<span id="cb2-3"><a href=""></a><span class="co"># Each tool is an explicit skill you let the agent call</span></span>
+<span id="cb2-4"><a href=""></a>tools <span class="op">=</span> [</span>
+<span id="cb2-5"><a href=""></a>    Tool(name<span class="op">=</span><span class="st">"search_web"</span>, fn<span class="op">=</span>search_web),</span>
+<span id="cb2-6"><a href=""></a>    Tool(name<span class="op">=</span><span class="st">"summarize"</span>, fn<span class="op">=</span>summarize),</span>
+<span id="cb2-7"><a href=""></a>]</span>
+<span id="cb2-8"><a href=""></a></span>
+<span id="cb2-9"><a href=""></a>agent <span class="op">=</span> AssistantAgent(</span>
+<span id="cb2-10"><a href=""></a>    name<span class="op">=</span><span class="st">"Researcher"</span>,</span>
+<span id="cb2-11"><a href=""></a>    objective<span class="op">=</span><span class="st">"Write a one-page market brief on solar-powered IoT devices"</span>,</span>
+<span id="cb2-12"><a href=""></a>    tools<span class="op">=</span>tools,</span>
+<span id="cb2-13"><a href=""></a>    reflexion<span class="op">=</span><span class="va">True</span>,      </span>
+<span id="cb2-14"><a href=""></a>    max_steps<span class="op">=</span><span class="dv">15</span></span>
+<span id="cb2-15"><a href=""></a>)</span>
+<span id="cb2-16"><a href=""></a></span>
+<span id="cb2-17"><a href=""></a>agent.run()               </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <aside class="notes">
 <p>Left side shows deterministic, hard-coded flow. Right side shows goal-oriented, self-directing agent.</p>
@@ -781,8 +781,80 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="memory" class="slide level2 smaller center" data-background-color="#ff6b9d">
-<h2>Memory</h2>
+<section id="context-engineering" class="slide level2 smaller center" data-background-color="#ff6b9d">
+<h2>Context Engineering</h2>
+</section>
+<section class="slide level2">
+
+<h3 class="small-font underline" id="context-engineering-components">Context Engineering Components</h3>
+<p>The key components that make up an AI agent’s context:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>📋 System Foundation</strong></p>
+<ul>
+<li><strong>Instructions/System Prompt:</strong> Initial behavior definitions, examples, and rules</li>
+<li><strong>User Prompt:</strong> Immediate task or question from the user</li>
+<li><strong>Structured Output:</strong> Response format definitions (e.g., JSON schema)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>🧠 Memory &amp; Knowledge</strong></p>
+<ul>
+<li><strong>State/History:</strong> Current conversation context and recent interactions</li>
+<li><strong>Long-Term Memory:</strong> Persistent knowledge across conversations</li>
+<li><strong>Retrieved Information (RAG):</strong> External, up-to-date knowledge from databases/APIs</li>
+<li><strong>Available Tools:</strong> Function definitions the agent can call</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h3 class="small-font underline" id="system-foundation">System Foundation</h3>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(255, 107, 157, 0.1); border-left: 4px solid #ff6b9d;">
+<p>You are an expert research planner. Your task is to break down a complex research query (delimited by <user_query></user_query>) into specific search subtasks, each focusing on a different aspect or source type.</p>
+</div>
+</div>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid #ffa500;">
+<p><user_query> What’s the latest news from Microsoft Layoff? </user_query></p>
+</div>
+</div>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(221, 160, 221, 0.1); border-left: 4px solid #dda0dd;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb3-1"><a href=""></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href=""></a>  <span class="dt">"query"</span><span class="fu">:</span> <span class="st">"What's the latest news from Microsoft Layoff?"</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href=""></a>  <span class="dt">"timeframe"</span><span class="fu">:</span> <span class="st">"last_3_days"</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href=""></a>  <span class="dt">"min_impact_score"</span><span class="fu">:</span> <span class="fl">0.4</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href=""></a>  <span class="dt">"depth"</span><span class="fu">:</span> <span class="st">"medium"</span></span>
+<span id="cb3-6"><a href=""></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="fragment">
+<div class="r-frame" style="padding: 1rem; background-color: rgba(78, 205, 196, 0.1); border-left: 4px solid #4ecdc4;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href=""></a><span class="ot">[</span></span>
+<span id="cb4-2"><a href=""></a>  <span class="fu">{</span></span>
+<span id="cb4-3"><a href=""></a>    <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"microsoft_layoff_news"</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href=""></a>    <span class="dt">"query"</span><span class="fu">:</span> <span class="st">"Microsoft layoffs announcements 2025"</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href=""></a>    <span class="dt">"source_type"</span><span class="fu">:</span> <span class="st">"news"</span><span class="fu">,</span></span>
+<span id="cb4-6"><a href=""></a>    <span class="dt">"time_period"</span><span class="fu">:</span> <span class="st">"recent"</span><span class="fu">,</span></span>
+<span id="cb4-7"><a href=""></a>    <span class="dt">"domain_focus"</span><span class="fu">:</span> <span class="st">"technology"</span><span class="fu">,</span></span>
+<span id="cb4-8"><a href=""></a>    <span class="dt">"priority"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb4-9"><a href=""></a>    <span class="dt">"start_date"</span><span class="fu">:</span> <span class="st">"2025-06-27T06:00:00.000Z"</span><span class="fu">,</span></span>
+<span id="cb4-10"><a href=""></a>    <span class="dt">"end_date"</span><span class="fu">:</span> <span class="st">"2025-07-06T05:59:59.999Z"</span></span>
+<span id="cb4-11"><a href=""></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb4-12"><a href=""></a>  <span class="fu">{</span></span>
+<span id="cb4-13"><a href=""></a>    <span class="dt">"id"</span><span class="fu">:</span> <span class="st">"tech_industry_layoffs"</span><span class="fu">,</span></span>
+<span id="cb4-14"><a href=""></a>    <span class="dt">"query"</span><span class="fu">:</span> <span class="st">"technology sector workforce reduction trends"</span><span class="fu">,</span></span>
+<span id="cb4-15"><a href=""></a>    <span class="dt">"source_type"</span><span class="fu">:</span> <span class="st">"industry_reports"</span><span class="fu">,</span></span>
+<span id="cb4-16"><a href=""></a>    <span class="dt">"time_period"</span><span class="fu">:</span> <span class="st">"quarterly"</span><span class="fu">,</span></span>
+<span id="cb4-17"><a href=""></a>    <span class="dt">"domain_focus"</span><span class="fu">:</span> <span class="st">"technology"</span><span class="fu">,</span></span>
+<span id="cb4-18"><a href=""></a>    <span class="dt">"priority"</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb4-19"><a href=""></a>    <span class="dt">"start_date"</span><span class="fu">:</span> <span class="st">"2025-04-01T06:00:00.000Z"</span><span class="fu">,</span></span>
+<span id="cb4-20"><a href=""></a>    <span class="dt">"end_date"</span><span class="fu">:</span> <span class="st">"2025-07-06T05:59:59.999Z"</span></span>
+<span id="cb4-21"><a href=""></a>  <span class="fu">}</span></span>
+<span id="cb4-22"><a href=""></a><span class="ot">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
 <section class="slide level2">
 
@@ -1028,6 +1100,74 @@
 <div class="fragment">
 <p><strong>Technical Implementation:</strong> Core Memory (persona &amp; user profile) + Recall Memory (conversation history) + Archival Memory (document storage)</p>
 </div>
+<h3 class="small-font underline" id="case-study-understanding-microsoft-layoffs">Case Study: Understanding Microsoft Layoffs</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h4 id="section-174-rd-tax-impact">🏛️ Section 174 R&amp;D Tax Impact</h4>
+<p><strong>Regulatory Change (2022)</strong></p>
+<ul>
+<li>R&amp;D expenses must be amortized over 5 years</li>
+<li>Previously: immediate deduction</li>
+<li>Software development costs hit hardest</li>
+</ul>
+<p><strong>Microsoft Financial Impact</strong></p>
+<ul>
+<li><strong>R&amp;D spending 2023:</strong> $27.2 billion</li>
+<li><strong>Additional tax burden:</strong> $2.3 billion annually</li>
+<li><strong>Response:</strong> 10,000 layoffs (Jan 2023)</li>
+<li><strong>Target savings:</strong> $1.2 billion</li>
+</ul>
+<p><strong>Industry-Wide Effect</strong></p>
+<ul>
+<li>$25 billion additional taxes across tech</li>
+<li>Major driver of 2022-2023 layoff wave</li>
+<li>All major tech companies affected</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<h4 id="ai-driven-workforce-transformation">🤖 AI-Driven Workforce Transformation</h4>
+<p><strong>Microsoft AI Investments</strong></p>
+<ul>
+<li><strong>OpenAI partnership:</strong> $10 billion</li>
+<li><strong>Copilot revenue:</strong> $4+ billion run rate</li>
+<li><strong>GitHub Copilot:</strong> 1.3M paid subscribers</li>
+<li><strong>Azure AI growth:</strong> 300% year-over-year</li>
+</ul>
+<p><strong>Roles Being Eliminated</strong></p>
+<ul>
+<li>Junior Software Engineers</li>
+<li>QA Testers → Automated testing</li>
+<li>Level 1 Customer Support → AI chatbots</li>
+<li>Training/Documentation → AI-generated</li>
+</ul>
+<p><strong>Productivity Transformation</strong></p>
+<ul>
+<li>Senior developers: 25-40% more productive</li>
+<li>Reduced need for junior mentorship</li>
+<li>AI handles routine tasks</li>
+</ul>
+</div></div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Key Insight:</strong> Microsoft layoffs result from both <strong>regulatory pressure</strong> (Section 174 tax burden) and <strong>technological advancement</strong> (AI automation replacing human roles)</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 class="small-font underline" id="context-makes-all-the-difference">Context Makes All the Difference</h3>
+<section id="without-context-injection" class="r-frame" style="padding: 1rem; background-color: rgba(255, 107, 157, 0.1); border-left: 4px solid #ff6b9d;">
+<h4>🚫 Without Context Injection</h4>
+<p>Microsoft has announced a significant round of layoffs, affecting approximately 9,000 employees [3b6e3bde]. This move is part of a larger restructuring effort within the company, with the layoffs impacting various divisions, including Xbox and sales [fcf5a533]. The decision was made to cut costs and streamline operations, according to reports [64906eba]. This is not the first round of layoffs at Microsoft, as the company had previously announced cuts in June 2025, affecting communications and marketing staffers [25983e9c]. The latest layoffs bring the total number of Microsoft employees let go in recent months to over 15,000 [09ee84c7]. The layoffs have been reported across various sources, with CNBC.com providing details on the 9,000 employee cut [3b6e3bde]. The Hindu and Yahoo Finance have also covered the story, confirming the number of affected employees [64906eba] [82226a42]. The layoffs are seen as a strategic move by Microsoft to adapt to changing market conditions and focus on key areas of growth [ca0e355d].</p>
+</section>
+<section id="with-context-injection" class="r-frame" style="padding: 1rem; background-color: rgba(0, 255, 136, 0.1); border-left: 4px solid #00ff88;">
+<h4>✅ With Context Injection</h4>
+<p>Microsoft has announced another round of layoffs, affecting approximately 9,000 employees [d4650898]. This move is part of a larger restructuring effort within the company, with the layoffs impacting various divisions, including Xbox and sales [4503fa1a]. The decision was made to cut deeper into its workforce, as reported by Business Insider [d4650898]. Microsoft’s largest layoff in years will have significant implications for the tech industry and its workforce [a8dc137b]. The company aims to refocus its resources on key areas, such as artificial intelligence [da5e9667].</p>
+</section>
 </section>
 <section id="evals" class="slide level2 smaller center" data-background-color="#ffa500">
 <h2>Evals</h2>
@@ -1143,7 +1283,6 @@
 <p><img data-src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExamJnaTU1bjZ5cHNmMnU1a3R6aHA1dmUwYzNmbmdkbnB1NmJpbnNleSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iUOzkJmvnFfqM/giphy.gif" width="400"></p>
 </div>
 
-
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
@@ -1153,20 +1292,20 @@
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <script src="slide_deck_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="slide_deck_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

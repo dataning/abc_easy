@@ -455,7 +455,104 @@ This checklist helps determine whether your system design leans toward tradition
 
 ---
 
-## Memory {.smaller background-color="#ff6b9d" .center}
+## Context Engineering {.smaller background-color="#ff6b9d" .center}
+
+---
+
+### Context Engineering Components {.small-font .underline}
+
+The key components that make up an AI agent's context:
+
+::: columns
+::: {.column width="50%"}
+
+**📋 System Foundation**
+
+- **Instructions/System Prompt:** Initial behavior definitions, examples, and rules
+- **User Prompt:** Immediate task or question from the user
+- **Structured Output:** Response format definitions (e.g., JSON schema)
+
+:::
+
+::: {.column width="50%"}
+
+**🧠 Memory & Knowledge**
+
+- **State/History:** Current conversation context and recent interactions
+- **Long-Term Memory:** Persistent knowledge across conversations
+- **Retrieved Information (RAG):** External, up-to-date knowledge from databases/APIs
+- **Available Tools:** Function definitions the agent can call
+
+:::
+:::
+
+
+---
+
+### System Foundation {.small-font .underline}
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(255, 107, 157, 0.1); border-left: 4px solid #ff6b9d;"}
+
+You are an expert research planner. Your task is to break down a complex research query (delimited by <user_query></user_query>) into specific search subtasks, each focusing on a different aspect or source type.
+
+:::
+:::
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid #ffa500;"}
+
+<user_query> What's the latest news from Microsoft Layoff? </user_query>
+
+:::
+:::
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(221, 160, 221, 0.1); border-left: 4px solid #dda0dd;"}
+
+```json
+{
+  "query": "What's the latest news from Microsoft Layoff?",
+  "timeframe": "last_3_days",
+  "min_impact_score": 0.4,
+  "depth": "medium"
+}
+```
+
+:::
+:::
+
+::: {.fragment}
+::: {.r-frame style="padding: 1rem; background-color: rgba(78, 205, 196, 0.1); border-left: 4px solid #4ecdc4;"}
+
+```json
+[
+  {
+    "id": "microsoft_layoff_news",
+    "query": "Microsoft layoffs announcements 2025",
+    "source_type": "news",
+    "time_period": "recent",
+    "domain_focus": "technology",
+    "priority": 1,
+    "start_date": "2025-06-27T06:00:00.000Z",
+    "end_date": "2025-07-06T05:59:59.999Z"
+  },
+  {
+    "id": "tech_industry_layoffs",
+    "query": "technology sector workforce reduction trends",
+    "source_type": "industry_reports",
+    "time_period": "quarterly",
+    "domain_focus": "technology",
+    "priority": 2,
+    "start_date": "2025-04-01T06:00:00.000Z",
+    "end_date": "2025-07-06T05:59:59.999Z"
+  }
+]
+```
+
+:::
+:::
+
 
 ---
 
@@ -605,6 +702,90 @@ flowchart LR
 ::: {.fragment}
 **Technical Implementation:** Core Memory (persona & user profile) + Recall Memory (conversation history) + Archival Memory (document storage)
 :::
+
+
+
+### Case Study: Understanding Microsoft Layoffs {.small-font .underline}
+
+::: columns
+::: {.column width="50%"}
+
+#### 🏛️ Section 174 R&D Tax Impact
+
+**Regulatory Change (2022)**
+
+- R&D expenses must be amortized over 5 years
+- Previously: immediate deduction
+- Software development costs hit hardest
+
+**Microsoft Financial Impact**
+
+- **R&D spending 2023:** $27.2 billion
+- **Additional tax burden:** $2.3 billion annually
+- **Response:** 10,000 layoffs (Jan 2023)
+- **Target savings:** $1.2 billion
+
+**Industry-Wide Effect**
+
+- $25 billion additional taxes across tech
+- Major driver of 2022-2023 layoff wave
+- All major tech companies affected
+
+:::
+
+::: {.column width="50%"}
+
+#### 🤖 AI-Driven Workforce Transformation
+
+**Microsoft AI Investments**
+
+- **OpenAI partnership:** $10 billion
+- **Copilot revenue:** $4+ billion run rate
+- **GitHub Copilot:** 1.3M paid subscribers
+- **Azure AI growth:** 300% year-over-year
+
+**Roles Being Eliminated**
+
+- Junior Software Engineers
+- QA Testers → Automated testing
+- Level 1 Customer Support → AI chatbots
+- Training/Documentation → AI-generated
+
+**Productivity Transformation**
+
+- Senior developers: 25-40% more productive
+- Reduced need for junior mentorship
+- AI handles routine tasks
+
+
+:::
+:::
+
+::: {.callout-important icon="💡" appearance="simple"}
+**Key Insight:** Microsoft layoffs result from both **regulatory pressure** (Section 174 tax burden) and **technological advancement** (AI automation replacing human roles)
+:::
+
+
+---
+
+### Context Makes All the Difference {.small-font .underline}
+
+::: {.r-frame style="padding: 1rem; background-color: rgba(255, 107, 157, 0.1); border-left: 4px solid #ff6b9d;"}
+
+#### 🚫 Without Context Injection
+
+Microsoft has announced a significant round of layoffs, affecting approximately 9,000 employees [3b6e3bde]. This move is part of a larger restructuring effort within the company, with the layoffs impacting various divisions, including Xbox and sales [fcf5a533]. The decision was made to cut costs and streamline operations, according to reports [64906eba]. This is not the first round of layoffs at Microsoft, as the company had previously announced cuts in June 2025, affecting communications and marketing staffers [25983e9c]. The latest layoffs bring the total number of Microsoft employees let go in recent months to over 15,000 [09ee84c7]. The layoffs have been reported across various sources, with CNBC.com providing details on the 9,000 employee cut [3b6e3bde]. The Hindu and Yahoo Finance have also covered the story, confirming the number of affected employees [64906eba] [82226a42]. The layoffs are seen as a strategic move by Microsoft to adapt to changing market conditions and focus on key areas of growth [ca0e355d].
+
+:::
+
+::: {.r-frame style="padding: 1rem; background-color: rgba(0, 255, 136, 0.1); border-left: 4px solid #00ff88;"}
+
+#### ✅ With Context Injection
+
+Microsoft has announced another round of layoffs, affecting approximately 9,000 employees [d4650898]. This move is part of a larger restructuring effort within the company, with the layoffs impacting various divisions, including Xbox and sales [4503fa1a]. The decision was made to cut deeper into its workforce, as reported by Business Insider [d4650898]. Microsoft's largest layoff in years will have significant implications for the tech industry and its workforce [a8dc137b]. The company aims to refocus its resources on key areas, such as artificial intelligence [da5e9667].
+
+:::
+
 
 ---
 
