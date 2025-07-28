@@ -1,108 +1,23 @@
 import streamlit as st
 
 def apply_theme():
-    """Apply the Netflix-style theme and CSS to the app with dark mode prevention"""
+    """Apply the Netflix-style theme and CSS to the app"""
     st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
     
-    /* Force light mode and prevent system dark mode interference */
-    :root {
-        color-scheme: light !important;
-    }
-    
-    html {
-        color-scheme: light !important;
-    }
-    
-    /* Override Streamlit's theme variables */
-    :root {
-        --primary-color: #E50914 !important;
-        --background-color: #141414 !important;
-        --secondary-background-color: #1a1a1a !important;
-        --text-color: #ffffff !important;
-        --font: 'Roboto', sans-serif !important;
-    }
-    
-    /* Force background colors on all Streamlit containers */
-    .stApp {
-        background-color: #141414 !important;
-        color: #ffffff !important;
-    }
-    
-    .main .block-container {
-        background-color: transparent !important;
-        color: #ffffff !important;
-    }
-    
-    [data-testid="stAppViewContainer"] {
-        background-color: #141414 !important;
-    }
-    
-    [data-testid="stHeader"] {
-        background-color: transparent !important;
-    }
-    
-    /* REMOVED: Hide default Streamlit elements */
-    /* Keep the toolbar visible for system configuration */
-    /* #MainMenu {visibility: hidden;} */
-    /* header {visibility: hidden;} */
+    /* Hide default Streamlit elements */
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
     footer {visibility: hidden;}
-    
-    /* Style the toolbar to match the theme */
-    [data-testid="stToolbar"] {
-        right: 20px !important;
-        top: 10px !important;
-    }
-    
-    /* Style the header to be visible but blend with theme */
-    header[data-testid="stHeader"] {
-        background-color: rgba(20, 20, 20, 0.8) !important;
-        backdrop-filter: blur(10px) !important;
-    }
-    
-    /* Override any Streamlit dark mode classes */
-    .st-emotion-cache-1y4p8pa {
-        background-color: #141414 !important;
-    }
-    
-    .st-emotion-cache-z5fcl4 {
-        background-color: #141414 !important;
-    }
-    
-    /* Force text colors */
-    * {
-        color-scheme: light !important;
-    }
-    
+
     body {
-        font-family: 'Roboto', sans-serif !important;
-        font-size: 0.8125rem !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        background-color: #141414 !important;
-        color: #ffffff !important;
-    }
-    
-    /* Ensure all text elements use white color */
-    p, span, div, h1, h2, h3, h4, h5, h6, label {
-        color: #ffffff !important;
-    }
-    
-    /* Force input fields to have proper styling */
-    input, textarea, select {
-        background-color: #2a2a2a !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(229, 9, 20, 0.3) !important;
-    }
-    
-    /* Override Streamlit's sidebar */
-    section[data-testid="stSidebar"] {
-        background-color: #1a1a1a !important;
-    }
-    
-    section[data-testid="stSidebar"] * {
-        color: #ffffff !important;
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.8125rem;
+        margin: 0;
+        padding: 0;
+        background-color: #141414;
+        color: #ffffff;
     }
 
     a {
@@ -118,7 +33,6 @@ def apply_theme():
         background-color: #f8f9fa !important;
         border-top: 1px solid #dee2e6 !important;
     }
-    
     /* Top navbar styles - UPDATED TO DARK THEME */
     .app-header {
         position: fixed;
@@ -126,13 +40,13 @@ def apply_theme():
         left: 0;
         right: 0;
         height: 60px;
-        background-color: #ffffff !important;
+        background-color: #ffffff;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         padding: 0 20px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        z-index: 999; /* Reduced to not overlap with Streamlit toolbar */
+        z-index: 1000;
         border-bottom: 1px solid rgba(229, 9, 20, 0.3);
     }
 
@@ -147,7 +61,7 @@ def apply_theme():
         align-items: center;
         padding: 0 15px;
         font-size: 14px;
-        color: #ffffff !important;
+        color: #ffffff;
         text-decoration: none;
         position: relative;
         font-family: 'Roboto', sans-serif;
@@ -160,20 +74,20 @@ def apply_theme():
     .nav-item:hover {
         background-color: rgba(229, 9, 20, 0.2);
         border-bottom: 2px solid #E50914;
-        color: #ffffff !important;
+        color: #ffffff;
     }
 
     .nav-item.active {
         background-color: rgba(229, 9, 20, 0.1);
         font-weight: 500;
-        color: #E50914 !important;
+        color: #E50914;
         border-bottom: 2px solid #E50914;
     }
 
     /* Blue button style for secondary navigation */
     .blue-button {
         background-color: transparent;
-        color: #E50914 !important;
+        color: #E50914;
         border: 1px solid #E50914;
         border-radius: 4px;
         font-size: 14px;
@@ -190,7 +104,7 @@ def apply_theme():
 
     .blue-button:hover {
         background-color: #E50914;
-        color: #ffffff !important;
+        color: #ffffff;
         transform: none;
         box-shadow: none;
     }
@@ -199,7 +113,7 @@ def apply_theme():
         position: relative;
         font-size: 18px;
         font-weight: 500;
-        color: #000000 !important;
+        color: #000000;
         font-family: 'Roboto', sans-serif;
         margin-left: 50px;
         margin-top: 0;
@@ -213,7 +127,7 @@ def apply_theme():
         transform: translateX(-50%);
         font-size: 32px;
         font-weight: 800;
-        color: #000000 !important;
+        color: #000000;
         font-family: 'Roboto', sans-serif;
         z-index: 1;
     }
@@ -224,7 +138,6 @@ def apply_theme():
         margin-left: 2px;
         position: relative;
         bottom: 8px;
-        color: #000000 !important;
     }
 
     .nav-actions {
@@ -241,7 +154,7 @@ def apply_theme():
     .options-button {
         background: none;
         border: none;
-        color: #ffffff !important;
+        color: #ffffff;
         font-size: 14px;
         cursor: pointer;
         display: flex;
@@ -257,7 +170,7 @@ def apply_theme():
     
     .top-right-buttons {
         position: absolute;
-        right: 120px; /* Adjusted to leave space for Streamlit toolbar */
+        right: 20px;
         top: 0;
         height: 60px;
         display: flex;
@@ -269,7 +182,7 @@ def apply_theme():
         display: flex;
         align-items: center;
         font-size: 14px;
-        color: #999 !important;
+        color: #999;
         text-decoration: none;
         cursor: pointer;
         font-family: 'Roboto', sans-serif;
@@ -282,8 +195,8 @@ def apply_theme():
 
     /* Animated Background */
     .main {
-        background-color: #141414 !important;
-        color: #ffffff !important;
+        background-color: #141414;
+        color: #ffffff;
         position: relative;
         min-height: 100vh;
         margin-top: 60px;
@@ -536,19 +449,19 @@ def apply_theme():
     
     /* Netflix-style buttons with red theme */
     .stButton>button {
-        background: linear-gradient(45deg, #e50914, #b81111) !important;
-        color: #ffffff !important;
-        border: none !important;
-        padding: 12px 30px !important;
-        font-size: 16px !important;
-        font-weight: 500 !important;
-        border-radius: 8px !important;
-        transition: all 0.3s ease !important;
-        position: relative !important;
-        overflow: hidden !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3) !important;
+        background: linear-gradient(45deg, #e50914, #b81111);
+        color: #ffffff;
+        border: none;
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
     }
     
     .stButton>button::before {
@@ -578,11 +491,11 @@ def apply_theme():
     }
     
     .stButton>button:hover {
-        background: linear-gradient(45deg, #ff1a2b, #e50914) !important;
-        transform: translateY(-2px) !important;
+        background: linear-gradient(45deg, #ff1a2b, #e50914);
+        transform: translateY(-2px);
         box-shadow: 
             0 6px 20px rgba(229, 9, 20, 0.4),
-            0 0 30px rgba(229, 9, 20, 0.3) !important;
+            0 0 30px rgba(229, 9, 20, 0.3);
     }
     
     .stButton>button:hover::before {
@@ -594,15 +507,15 @@ def apply_theme():
     }
     
     .product-card {
-        background: linear-gradient(145deg, #181818, #1a1a1a) !important;
-        border-radius: 8px !important;
-        padding: 20px !important;
-        margin: 10px !important;
-        transition: all 0.3s ease !important;
-        cursor: pointer !important;
-        position: relative !important;
-        overflow: hidden !important;
-        border: 1px solid rgba(229, 9, 20, 0.2) !important;
+        background: linear-gradient(145deg, #181818, #1a1a1a);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 10px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(229, 9, 20, 0.2);
     }
     
     .product-card::before {
@@ -618,9 +531,9 @@ def apply_theme():
     }
     
     .product-card:hover {
-        transform: scale(1.05) translateY(-5px) !important;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(229, 9, 20, 0.3) !important;
-        border-color: rgba(229, 9, 20, 0.6) !important;
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(229, 9, 20, 0.3);
+        border-color: rgba(229, 9, 20, 0.6);
     }
     
     .product-card:hover::before {
@@ -628,59 +541,59 @@ def apply_theme():
     }
     
     .product-card h3 {
-        color: white !important;
-        margin-bottom: 10px !important;
+        color: white;
+        margin-bottom: 10px;
     }
     
     .product-card h4 {
-        color: #e50914 !important;
-        font-size: 12px !important;
-        margin: 0 0 8px 0 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
+        color: #e50914;
+        font-size: 12px;
+        margin: 0 0 8px 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     
     .product-card p {
-        color: #ccc !important;
+        color: #ccc;
     }
     
     .product-card strong {
-        color: white !important;
+        color: white;
     }
     
     .client-card {
-        background: linear-gradient(145deg, #1a1a1a, #2a2a2a) !important;
-        padding: 15px !important;
-        border-radius: 12px !important;
-        margin-bottom: 10px !important;
-        color: white !important;
-        border: 2px solid rgba(229, 9, 20, 0.3) !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-        transition: all 0.3s ease !important;
-        cursor: pointer !important;
-        position: relative !important;
-        overflow: hidden !important;
+        background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        color: white;
+        border: 2px solid rgba(229, 9, 20, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
     }
     
     .client-card:hover {
-        transform: scale(1.03) translateY(-3px) !important;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(229, 9, 20, 0.4) !important;
-        border-color: rgba(229, 9, 20, 0.6) !important;
+        transform: scale(1.03) translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(229, 9, 20, 0.4);
+        border-color: rgba(229, 9, 20, 0.6);
     }
     
     .hero-section {
         background: 
             linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(229, 9, 20, 0.3) 30%, rgba(229, 9, 20, 0.2) 70%, rgba(0,0,0,0.9) 100%),
-            linear-gradient(45deg, #141414 0%, #1a1a1a 50%, #141414 100%) !important;
-        background-size: 400% 400% !important;
-        animation: futuristicGradient 20s ease infinite !important;
-        padding: 100px 20px !important;
-        text-align: center !important;
-        margin-bottom: 40px !important;
-        position: relative !important;
-        overflow: hidden !important;
-        color: white !important;
-        margin-top: -50px !important;
+            linear-gradient(45deg, #141414 0%, #1a1a1a 50%, #141414 100%);
+        background-size: 400% 400%;
+        animation: futuristicGradient 20s ease infinite;
+        padding: 100px 20px;
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        margin-top: -50px;
     }
     
     @keyframes futuristicGradient {
@@ -783,24 +696,24 @@ def apply_theme():
     }
     
     .hero-section h1 {
-        color: white !important;
-        position: relative !important;
-        z-index: 2 !important;
+        color: white;
+        position: relative;
+        z-index: 2;
         text-shadow: 
             0 0 10px rgba(229, 9, 20, 0.8),
             0 0 20px rgba(229, 9, 20, 0.6),
-            0 0 30px rgba(229, 9, 20, 0.4) !important;
-        animation: text-glow 4s ease-in-out infinite alternate !important;
+            0 0 30px rgba(229, 9, 20, 0.4);
+        animation: text-glow 4s ease-in-out infinite alternate;
     }
     
     .hero-section p {
-        color: white !important;
-        position: relative !important;
-        z-index: 2 !important;
+        color: white;
+        position: relative;
+        z-index: 2;
         text-shadow: 
             0 0 5px rgba(229, 9, 20, 0.6),
-            0 0 10px rgba(229, 9, 20, 0.4) !important;
-        animation: text-pulse 3s ease-in-out infinite alternate !important;
+            0 0 10px rgba(229, 9, 20, 0.4);
+        animation: text-pulse 3s ease-in-out infinite alternate;
     }
     
     @keyframes text-glow {
@@ -833,22 +746,22 @@ def apply_theme():
     }
     
     .home-option-card {
-        text-align: center !important;
-        padding: 40px !important;
-        background: linear-gradient(145deg, #222, #2a2a2a) !important;
-        border-radius: 8px !important;
-        border: 1px solid rgba(229, 9, 20, 0.3) !important;
-        color: white !important;
+        text-align: center;
+        padding: 40px;
+        background: linear-gradient(145deg, #222, #2a2a2a);
+        border-radius: 8px;
+        border: 1px solid rgba(229, 9, 20, 0.3);
+        color: white;
     }
     
     .home-option-card h3 {
-        color: white !important;
-        margin-bottom: 15px !important;
+        color: white;
+        margin-bottom: 15px;
     }
     
     .home-option-card p {
-        color: #ccc !important;
-        margin: 0 !important;
+        color: #ccc;
+        margin: 0;
     }
     
     @keyframes gradientShift {
@@ -888,29 +801,28 @@ def apply_theme():
     }
     
     .attribute-pill {
-        display: inline-block !important;
-        padding: 4px 12px !important;
-        margin: 2px !important;
-        border-radius: 20px !important;
-        font-size: 12px !important;
-        font-weight: 500 !important;
-        transition: all 0.3s ease !important;
-        background: linear-gradient(45deg, rgba(229, 9, 20, 0.2), rgba(229, 9, 20, 0.4)) !important;
-        color: #ffffff !important;
+        display: inline-block;
+        padding: 4px 12px;
+        margin: 2px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        background: linear-gradient(45deg, rgba(229, 9, 20, 0.2), rgba(229, 9, 20, 0.4));
     }
     
     .attribute-pill:hover {
-        transform: scale(1.1) !important;
-        box-shadow: 0 2px 8px rgba(229, 9, 20, 0.4) !important;
+        transform: scale(1.1);
+        box-shadow: 0 2px 8px rgba(229, 9, 20, 0.4);
     }
     
     .traffic-light {
-        width: 20px !important;
-        height: 20px !important;
-        border-radius: 50% !important;
-        display: inline-block !important;
-        margin: 0 2px !important;
-        animation: pulse 2s ease-in-out infinite !important;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 2px;
+        animation: pulse 2s ease-in-out infinite;
     }
     
     @keyframes pulse {
@@ -925,30 +837,30 @@ def apply_theme():
     }
     
     .green-light { 
-        background: radial-gradient(circle, #4CAF50, #2E7D32) !important;
-        box-shadow: 0 0 10px rgba(76, 175, 80, 0.5) !important;
+        background: radial-gradient(circle, #4CAF50, #2E7D32);
+        box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
     }
     .yellow-light { 
-        background: radial-gradient(circle, #FFC107, #F57C00) !important;
-        box-shadow: 0 0 10px rgba(255, 193, 7, 0.5) !important;
+        background: radial-gradient(circle, #FFC107, #F57C00);
+        box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
     }
     .red-light { 
-        background: radial-gradient(circle, #f44336, #c62828) !important;
-        box-shadow: 0 0 10px rgba(244, 67, 54, 0.5) !important;
+        background: radial-gradient(circle, #f44336, #c62828);
+        box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
     }
     
     .match-explanation {
-        background: linear-gradient(145deg, #222, #2a2a2a) !important;
-        padding: 15px !important;
-        border-radius: 8px !important;
-        margin-top: 10px !important;
-        border-left: 3px solid #e50914 !important;
-        animation: slideIn 0.5s ease-out !important;
-        color: white !important;
+        background: linear-gradient(145deg, #222, #2a2a2a);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+        border-left: 3px solid #e50914;
+        animation: slideIn 0.5s ease-out;
+        color: white;
     }
     
     .match-explanation strong {
-        color: white !important;
+        color: white;
     }
     
     @keyframes slideIn {
@@ -975,76 +887,6 @@ def apply_theme():
             transform: translateY(0);
             opacity: 1;
         }
-    }
-    
-    /* Override any system or browser dark mode preferences */
-    @media (prefers-color-scheme: dark) {
-        :root {
-            color-scheme: light !important;
-        }
-        
-        * {
-            color-scheme: light !important;
-        }
-        
-        body {
-            background-color: #141414 !important;
-            color: #ffffff !important;
-        }
-    }
-    
-    /* Force specific Streamlit components to use our theme */
-    [data-baseweb="select"] {
-        background-color: #2a2a2a !important;
-    }
-    
-    [data-baseweb="input"] {
-        background-color: #2a2a2a !important;
-        color: #ffffff !important;
-    }
-    
-    /* Override Streamlit's emotion cache classes that might interfere */
-    [class*="st-emotion-cache"] {
-        color: inherit !important;
-        background-color: transparent !important;
-    }
-    
-    /* Ensure all Streamlit widgets follow the theme */
-    .stSelectbox > div > div {
-        background-color: #2a2a2a !important;
-        color: #ffffff !important;
-    }
-    
-    .stTextInput > div > div > input {
-        background-color: #2a2a2a !important;
-        color: #ffffff !important;
-    }
-    
-    .stTextArea > div > div > textarea {
-        background-color: #2a2a2a !important;
-        color: #ffffff !important;
-    }
-    
-    /* Force override for any Streamlit theme detection */
-    .streamlit-wide {
-        background-color: #141414 !important;
-    }
-    
-    .element-container {
-        color: #ffffff !important;
-    }
-    
-    /* Ensure metrics and other components use white text */
-    [data-testid="metric-container"] {
-        color: #ffffff !important;
-    }
-    
-    [data-testid="stMetricValue"] {
-        color: #ffffff !important;
-    }
-    
-    [data-testid="stMetricLabel"] {
-        color: #cccccc !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -1078,75 +920,20 @@ def render_animated_background():
 def render_hero_section():
     st.markdown("""
     <div class="hero-section">
-        <h1 style="font-size: 48px; margin-bottom: 20px; color: white !important;">Matchmaker</h1>
-        <p style="font-size: 24px; margin-bottom: 40px; color: white !important;">Find the perfect match between investment products and client preferences</p>
+        <h1 style="font-size: 48px; margin-bottom: 20px;">Matchmaker</h1>
+        <p style="font-size: 24px; margin-bottom: 40px;">Find the perfect match between investment products and client preferences</p>
     </div>
     """, unsafe_allow_html=True)
 
 def render_footer():
     """Render the application footer with dark theme"""
     st.markdown('''
-    <div style="position: fixed; bottom: 0; left: 0; right: 0; padding: 20px; background-color: #f8f9fa !important; border-top: 1px solid #dee2e6; z-index: 1001;">
+    <div style="position: fixed; bottom: 0; left: 0; right: 0; padding: 20px; background-color: #f8f9fa; border-top: 1px solid #dee2e6; z-index: 1001;">
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <p style="color: #000000 !important; font-size: 16px; margin: 0; text-align: center;">
+            <p style="color: #000000; font-size: 16px; margin: 0; text-align: center;">
                 © 2025 MASS Solutions <span style="color: #E50914;">❤️</span> Made By PAG
             </p>
         </div>
     </div>
     <div style="height: 80px;"></div>
     ''', unsafe_allow_html=True)
-
-# Additional helper function to force theme application
-def force_theme_application():
-    """Call this at the beginning of your app to ensure theme is applied"""
-    # Set Streamlit config to force light theme
-    st.set_page_config(
-        page_title="MASS Matchmaking - Aladdin",
-        page_icon="🎯",
-        layout="wide",
-        initial_sidebar_state="collapsed"
-    )
-    
-    # Apply custom theme immediately
-    apply_theme()
-    
-    # Inject JavaScript to override any system preferences
-    st.markdown("""
-    <script>
-        // Force disable dark mode at the document level
-        document.documentElement.style.colorScheme = 'light';
-        document.body.style.colorScheme = 'light';
-        
-        // Override any Streamlit theme detection
-        if (window.localStorage) {
-            window.localStorage.setItem('streamlit-theme', 'light');
-        }
-        
-        // Force background color on body
-        document.body.style.backgroundColor = '#141414';
-        
-        // Continuously check and force our theme
-        setInterval(() => {
-            const root = document.documentElement;
-            const body = document.body;
-            
-            // Force color scheme
-            root.style.colorScheme = 'light';
-            body.style.colorScheme = 'light';
-            
-            // Force background colors
-            body.style.backgroundColor = '#141414';
-            
-            // Find and update any Streamlit containers
-            const appView = document.querySelector('[data-testid="stAppViewContainer"]');
-            if (appView) {
-                appView.style.backgroundColor = '#141414';
-            }
-            
-            const stApp = document.querySelector('.stApp');
-            if (stApp) {
-                stApp.style.backgroundColor = '#141414';
-            }
-        }, 100);
-    </script>
-    """, unsafe_allow_html=True)
